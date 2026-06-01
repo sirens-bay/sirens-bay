@@ -271,8 +271,56 @@
             transform: scale(1.05);
         }
 
-        /* МОДАЛЬНОЕ ОКНО (онлайн-запись) */
-        .modal {
+        /* masters section */
+        .masters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .master-card {
+            background: white;
+            border-radius: 30px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            border: 1px solid rgba(30,107,107,0.1);
+        }
+        .master-card:hover {
+            transform: translateY(-5px);
+        }
+        .master-photo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 3px solid #1E6B6B;
+        }
+        .master-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1E6B6B;
+        }
+        .master-details-btn {
+            background: #FF7F6E;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .master-details-btn:hover {
+            background: #e56b5a;
+        }
+
+        /* Модальное окно мастера */
+        .master-modal {
             display: none;
             position: fixed;
             z-index: 2000;
@@ -280,81 +328,53 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.6);
+            background-color: rgba(0,0,0,0.7);
             backdrop-filter: blur(4px);
             justify-content: center;
             align-items: center;
         }
-        .modal-content {
+        .master-modal-content {
             background: white;
-            max-width: 550px;
+            max-width: 500px;
             width: 90%;
             border-radius: 40px;
-            padding: 30px 25px;
+            padding: 30px;
             position: relative;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
-            animation: modalFadeIn 0.4s ease;
+            animation: modalFadeIn 0.3s ease;
             max-height: 90vh;
             overflow-y: auto;
+            text-align: center;
         }
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .modal-close {
+        .master-modal-close {
             position: absolute;
-            top: 20px;
-            right: 25px;
+            top: 15px;
+            right: 20px;
             font-size: 28px;
-            font-weight: bold;
             cursor: pointer;
             color: #1E6B6B;
-            transition: 0.2s;
         }
-        .modal-close:hover {
-            color: #FF7F6E;
-        }
-        .modal h2 {
-            text-align: center;
+        .master-modal-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
             margin-bottom: 20px;
-            color: #1E6B6B;
+            border: 3px solid #FF7F6E;
         }
-        .form-row {
-            margin-bottom: 20px;
+        .master-modal-name {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .master-modal-info {
             text-align: left;
+            margin-top: 20px;
         }
-        .form-row label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #1A2A3A;
-        }
-        .form-row input, .form-row select {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 25px;
-            font-family: 'Raleway', sans-serif;
+        .master-modal-info p {
+            margin: 10px 0;
             font-size: 1rem;
         }
-        .form-row input:focus, .form-row select:focus {
-            outline: none;
-            border-color: #1E6B6B;
-        }
-        .modal .btn {
-            width: 100%;
-            text-align: center;
-            margin-top: 10px;
-        }
-        #modalMessage {
-            margin-top: 20px;
-            text-align: center;
+        .master-modal-info strong {
+            color: #1E6B6B;
         }
 
         /* contacts */
@@ -424,9 +444,9 @@
             .section-title {
                 font-size: 2rem;
             }
-            .modal-content {
-                padding: 20px;
-                width: 95%;
+            .master-photo {
+                width: 140px;
+                height: 140px;
             }
         }
 
@@ -451,6 +471,26 @@
             pointer-events: none;
             z-index: -1;
         }
+
+        .arnica-button {
+            display: inline-block;
+            background: #FF7F6E;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+            margin-right: 15px;
+        }
+        .arnica-button:hover {
+            background: #e56b5a;
+            transform: translateY(-3px);
+        }
     </style>
 </head>
 <body>
@@ -461,7 +501,7 @@
 <header>
     <div class="container navbar">
         <a href="#" class="logo">
-            <img src="https://sun9-1.userapi.com/s/v1/ig2/lQEQ2YdHpZ9j1ZfJ-5LuXjOW8IxVmantQQzhs378QucJDmrA8ozrYE9h0nkRiOnl2SdQ5U7LESTV9D2mq8F0x2DX.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&u=LX9Csl_770J41MWbLRjjaYWNaTmzjlBnmGvDSJJKgvc&cs=640x0" alt="Sirens Bay" style="height: 80px; width: 80px; object-fit: cover; border-radius: 50%;">
+            <img src="logo.jpg" alt="Sirens Bay" style="height: 80px; width: 80px; object-fit: cover; border-radius: 50%;">
         </a>
         <div class="menu-toggle" id="mobile-menu">
             <i class="fas fa-bars"></i>
@@ -469,9 +509,11 @@
         <ul class="nav-links" id="nav-links">
             <li><a href="#about">О нас</a></li>
             <li><a href="#services">Услуги</a></li>
+            <li><a href="#masters">Мастера</a></li>
             <li><a href="#portfolio">Портфолио</a></li>
-            <li><a href="#" id="modalOpenLink">Запись</a></li>
+            <li><a href="#" id="arnica-menu-link">Запись</a></li>
             <li><a href="#contacts">Контакты</a></li>
+            <li><a href="#contacts">Обучение</a></li>
         </ul>
     </div>
 </header>
@@ -484,7 +526,7 @@
                 <p>Мы — студия в Новосибирске, где сочетаются качество, комфорт и продуманный образ 🧜‍♀️<br>
                 Здесь не нужно переживать «как сделают» и не нужно знать, чего ты хочешь 🌟<br>
                 🧜‍♀️ Мы подбираем и собираем образ под тебя так, чтобы ты чувствовала себя уверенно и ловила комплименты каждый день 🧜‍♀️</p>
-                <a href="#" id="showModalBtn" class="btn">Записаться онлайн</a>
+                <button class="btn arnica-button" onclick="onlineBooking.open();return false;">Запишитесь прямо сейчас!</button>
                 <a href="#services" class="btn btn-outline" style="margin-left: 15px;">Услуги</a>
             </div>
             <div class="hero-image">
@@ -495,7 +537,7 @@
 
     <section id="about">
         <div class="container">
-            <h2 class="section-title">О бухте сирен</h2>
+            <h2 class="section-title">О нас</h2>
             <div class="about-text">
                 <p>Sirens Bay — это пространство, где морская эстетика встречается с безупречной стерильностью. Мы создали место, в котором вы сможете отдохнуть от городского шторма, пока наши мастера творят дизайнерские шедевры. Каждый инструмент проходит сухожаровую обработку, одноразовые покрытия, воздух очищается.</p>
             </div>
@@ -519,7 +561,7 @@
                     <p class="service-desc">Классический, аппаратный, SPA-маникюр. Дизайн с морскими мотивами.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-shell"></i></div>
+                    <div class="service-icon"><i class="fas fa-seashell"></i></div>
                     <h3>Педикюр</h3>
                     <div class="service-price">от 2200 ₽</div>
                     <p class="service-desc">Медицинский, аппаратный, с покрытием. Комфорт и гигиена.</p>
@@ -543,16 +585,37 @@
         </div>
     </section>
 
+    <!-- Секция Мастера -->
+    <section id="masters" style="background: #FDF8F0;">
+        <div class="container">
+            <h2 class="section-title">Наши мастера</h2>
+            <div class="masters-grid" id="mastersGrid"></div>
+        </div>
+    </section>
+
+    <!-- Модальное окно мастера -->
+    <div id="masterModal" class="master-modal">
+        <div class="master-modal-content">
+            <span class="master-modal-close">&times;</span>
+            <img id="modalMasterPhoto" class="master-modal-photo" src="" alt="Фото мастера">
+            <h2 id="modalMasterName" class="master-modal-name"></h2>
+            <div class="master-modal-info" id="modalMasterInfo"></div>
+        </div>
+    </div>
+
     <section id="portfolio">
         <div class="container">
             <h2 class="section-title">Наши работы</h2>
             <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-item"><img src="https://sun9-28.userapi.com/s/v1/ig2/JllfY9A57LK_nNBpqhW76iJ4MeYqOABq3bhKHa9zd9kUmOpBJP-TIBbN2p7C2wX4BS7YE1sLMmwyVD3Q1LvOIL65.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Работа маникюр"></div>
-                <div class="portfolio-item"><img src="https://sun9-8.userapi.com/s/v1/ig2/w-kQa5nd_wLgnjtlwzAhY_AIJQdUHY2GkeBI5sjLHbphNqm3OKpmpDC3lH0vE6WjeDh6zV9ERAvpPST6nTjsDyRK.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Педикюр"></div>
-                <div class="portfolio-item"><img src="https://sun9-72.userapi.com/s/v1/ig2/0TQlw0XM40RYzm419uDPMjBo_nn8eCUe0SXayzIK7AzQJUv7P8GjlSRoUhwViB1h7g4rBZCIUXG9UunK375dRimY.jpg?quality=95&as=32x13,48x19,72x29,108x43,160x63,240x95,360x143,480x190,540x214,640x254,720x286,1064x422&from=bu&u=TitZ5w2L3P_dTww_LIlHyHCoZ8Nf3-w6o2Ekr5v7OZc&cs=1064x0" alt="Брови"></div>
-                <div class="portfolio-item"><img src="https://sun9-22.userapi.com/s/v1/ig2/Ay1HuZGyuj8r81DqJmgBGle82AhioZpNVgFtDbEgPP6Z5mouPX3GJc8ISStnErGigtKKqQa53mcGhXFBCdWYB24i.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Ресницы"></div>
-                <div class="portfolio-item"><img src="https://sun9-71.userapi.com/s/v1/ig2/LD6aalfy79LElvf19Gistrh8KwM2L8Wu25Vnt9m6uSSRqVY8oyqKoAvtiH6KdYUWLMUsk4mYUO-tjBkBOTngqfEu.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,960x1280&from=bu&u=mBbNIQWseTaMkZezaJXcRBJ96X-kl9b0F_aJaIfVTt4&cs=960x0" alt="Маникюр2"></div>  
-                <div class="portfolio-item"><img src="https://sun9-88.userapi.com/s/v1/ig2/jE_Bkpmz4U_EfQMvgjWwP7wZnlqZ-QJqRSuL9myTrsEAKxMio8SLc0q47wsKGCQpBXkCn2LJXvURGBQdq81gizJk.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,960x1280&from=bu&u=EPeDGUonH_-ga7ddSBwl9BPApjwqf4THNG2CNdwCkNc&cs=960x0" alt="Маникюр3"></div>   
+                <div class="portfolio-item"><img src="маникюр1.jpg" alt="Маникюр"></div>
+                <div class="portfolio-item"><img src="педикюр1.jpg" alt="Педикюр"></div>
+                <div class="portfolio-item"><img src="брови1.jpg" alt="Брови"></div>
+                <div class="portfolio-item"><img src="ресницы1.jpg" alt="Ресницы"></div>
+                <div class="portfolio-item"><img src="маникюр2.jpg" alt="Маникюр2"></div>  
+                <div class="portfolio-item"><img src="маникюр3.jpg" alt="Маникюр3"></div>
+                <div class="portfolio-item"><img src="маникюр4.jpg" alt="Маникюр4"></div>  
+                <div class="portfolio-item"><img src="маникюр5.jpg" alt="Маникюр5"></div>  
+                <div class="portfolio-item"><img src="маникюр6.jpg" alt="Маникюр6"></div>   
             </div>
         </div>
     </section>
@@ -587,173 +650,109 @@
     </div>
 </footer>
 
-<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ЗАПИСИ -->
-<div id="bookingModal" class="modal">
-    <div class="modal-content">
-        <span class="modal-close">&times;</span>
-        <h2>Онлайн-запись</h2>
-        <form id="modalBookingForm">
-            <div class="form-row">
-                <label>Услуга:</label>
-                <select id="modalService" required>
-                    <option value="Маникюр">Маникюр — 1500 ₽</option>
-                    <option value="Педикюр">Педикюр — 2200 ₽</option>
-                    <option value="Брови">Брови — 800 ₽</option>
-                    <option value="Ресницы">Ресницы — 1500 ₽</option>
-                </select>
-            </div>
-            <div class="form-row">
-                <label>Дата:</label>
-                <input type="date" id="modalDate" required>
-            </div>
-            <div class="form-row">
-                <label>Время:</label>
-                <select id="modalTime" required disabled>
-                    <option value="">Сначала выберите дату</option>
-                </select>
-            </div>
-            <div class="form-row">
-                <label>Ваше имя:</label>
-                <input type="text" id="modalName" required>
-            </div>
-            <div class="form-row">
-                <label>Телефон:</label>
-                <input type="tel" id="modalPhone" required>
-            </div>
-            <button type="submit" class="btn">Записаться</button>
-        </form>
-        <div id="modalMessage"></div>
-    </div>
-</div>
+<!-- Скрипт Arnica -->
+<script type="text/javascript" src="https://app.arnica.pro/booking/script/button/orgid/80812"></script>
 
 <script>
-    // Модальное окно
-    const modal = document.getElementById('bookingModal');
-    const openBtns = document.querySelectorAll('#showModalBtn, #modalOpenLink');
-    const closeBtn = document.querySelector('.modal-close');
+    // Данные мастеров (без телефонов)
+    const masters = [
+        {
+            name: "Елена Губенко",
+            photo: "Мастер1.jpg",
+            experience: "8 лет",
+            specialization: "Маникюр, педикюр, дизайн",
+            education: "Высшее, Новосибирский технологический институт, дизайн ногтевого сервиса",
+            about: "Елена — главный мастер салона, создаёт уникальные дизайны с морской тематикой. Любит экспериментировать с текстурами и стразами."
+        },
+        {
+            name: "Екатерина Риф",
+            photo: "Мастер1.jpg",
+            experience: "6 лет",
+            specialization: "Брови, ресницы, ламинирование",
+            education: "Курсы повышения квалификации по brow-арту, международный сертификат",
+            about: "Екатерина придаёт взгляду выразительность, идеально подбирает форму бровей и объём ресниц."
+        },
 
-    function openModal() {
-        modal.style.display = 'flex';
-    }
-    function closeModal() {
-        modal.style.display = 'none';
-        document.getElementById('modalMessage').innerHTML = '';
-    }
-
-    openBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal();
-        });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) closeModal();
-    });
-
-    // ------ ЛОГИКА РАБОТЫ С ЗАПИСЬЮ (Google Sheets, без email) ------
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRJNywIcIm8tS-BbYHw17qvCCeKeNjyqD7wJqdDtEiPzYsuR2lX0H0yIkLxpG6s2BbwQ/exec';
-
-let occupiedSlots = [];
-
-async function loadOccupiedSlots() {
-    try {
-        const response = await fetch(SCRIPT_URL);
-        occupiedSlots = await response.json();
-        console.log('Загружено слотов:', occupiedSlots.length);
-    } catch(e) {
-        console.error(e);
-        occupiedSlots = [];
-    }
-}
-
-function generateTimeSlots(date) {
-    const slots = [];
-    for (let h = 10; h <= 20; h++) {
-        let timeStr = `${h.toString().padStart(2,'0')}:00`;
-        const isOccupied = occupiedSlots.some(slot => slot.date === date && slot.time === timeStr);
-        if (!isOccupied) slots.push(timeStr);
-    }
-    return slots;
-}
-
-const modalDateInput = document.getElementById('modalDate');
-const modalTimeSelect = document.getElementById('modalTime');
-
-modalDateInput.addEventListener('change', async function() {
-    const date = this.value;
-    if (!date) return;
-    await loadOccupiedSlots();
-    const slots = generateTimeSlots(date);
-    modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
-    if (slots.length === 0) {
-        modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
-        modalTimeSelect.disabled = true;
-    } else {
-        slots.forEach(slot => {
-            const option = document.createElement('option');
-            option.value = slot;
-            option.textContent = slot;
-            modalTimeSelect.appendChild(option);
-        });
-        modalTimeSelect.disabled = false;
-    }
-});
-
-const modalForm = document.getElementById('modalBookingForm');
-modalForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const submitBtn = this.querySelector('button[type="submit"]');
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Отправка...';
-
-    const service = document.getElementById('modalService').value;
-    const date = document.getElementById('modalDate').value;
-    const time = document.getElementById('modalTime').value;
-    const name = document.getElementById('modalName').value;
-    const phone = document.getElementById('modalPhone').value;
-
-    const data = { service, date, time, name, phone };
-
-    try {
-        const response = await fetch(SCRIPT_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        });
-        const result = await response.json();
-        if (result.success) {
-            document.getElementById('modalMessage').innerHTML = '<span style="color: green;">✅ Заявка отправлена! Мы свяжемся с вами.</span>';
-            modalForm.reset();
-            modalTimeSelect.innerHTML = '<option value="">Сначала выберите дату</option>';
-            modalTimeSelect.disabled = true;
-            await loadOccupiedSlots();
-            setTimeout(() => {
-                closeModal();
-                document.getElementById('modalMessage').innerHTML = '';
-            }, 3000);
-        } else {
-            document.getElementById('modalMessage').innerHTML = `<span style="color: red;">❌ ${result.error || 'Ошибка'}</span>`;
+        {
+            name: "Ольга Песок",
+            photo: "Мастер1.jpg",
+            experience: "5 лет",
+            specialization: "Педикюр, SPA-уход, медицинский педикюр",
+            education: "Медицинское образование, сертификат по подологии",
+            about: "Ольга специализируется на комплексном уходе за стопами, использует только безопасные материалы."
         }
-    } catch(err) {
-        console.error(err);
-        document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Ошибка соединения. Попробуйте позже.</span>';
-    } finally {
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Записаться';
+    ];
+
+    // Генерация карточек мастеров
+    const mastersGrid = document.getElementById('mastersGrid');
+    function renderMasters() {
+        mastersGrid.innerHTML = '';
+        masters.forEach((master, index) => {
+            const card = document.createElement('div');
+            card.className = 'master-card';
+            card.innerHTML = `
+                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://via.placeholder.com/180x180/FDF8F0/1E6B6B?text=Фото'">
+                <h3 class="master-name">${master.name}</h3>
+                <button class="master-details-btn" data-index="${index}">Подробнее</button>
+            `;
+            mastersGrid.appendChild(card);
+        });
+        // Добавляем обработчики на кнопки
+        document.querySelectorAll('.master-details-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const idx = btn.getAttribute('data-index');
+                showMasterModal(masters[idx]);
+            });
+        });
     }
-});
 
-loadOccupiedSlots();
+    // Модальное окно
+    const masterModal = document.getElementById('masterModal');
+    const modalClose = document.querySelector('.master-modal-close');
+    const modalPhoto = document.getElementById('modalMasterPhoto');
+    const modalName = document.getElementById('modalMasterName');
+    const modalInfo = document.getElementById('modalMasterInfo');
 
-    // Мобильное меню и плавный скролл
+    function showMasterModal(master) {
+        modalPhoto.src = master.photo;
+        modalPhoto.onerror = () => { modalPhoto.src = 'https://via.placeholder.com/150x150/FDF8F0/1E6B6B?text=Фото'; };
+        modalName.textContent = master.name;
+        modalInfo.innerHTML = `
+            <p><strong>Стаж:</strong> ${master.experience}</p>
+            <p><strong>Специализация:</strong> ${master.specialization}</p>
+            <p><strong>Образование:</strong> ${master.education}</p>
+            <p><strong>О себе:</strong> ${master.about}</p>
+        `;
+        masterModal.style.display = 'flex';
+    }
+
+    modalClose.addEventListener('click', () => {
+        masterModal.style.display = 'none';
+    });
+    window.addEventListener('click', (e) => {
+        if (e.target === masterModal) masterModal.style.display = 'none';
+    });
+
+    renderMasters();
+
+    // Обработчик для пункта меню "Запись" через Arnica
+    document.getElementById('arnica-menu-link').addEventListener('click', function(e) {
+        e.preventDefault();
+        if (typeof onlineBooking !== 'undefined' && onlineBooking.open) {
+            onlineBooking.open();
+        } else {
+            alert("Система записи загружается, попробуйте еще раз.");
+        }
+    });
+
+    // Мобильное меню
     const mobileBtn = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
     mobileBtn.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
 
+    // Плавный скролл для ссылок навигации (кроме пункта "Запись", у него своё поведение)
     document.querySelectorAll('.nav-links a:not([href="#"])').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
@@ -769,7 +768,7 @@ loadOccupiedSlots();
     });
 </script>
 
-<!-- Волны Canvas -->
+<!-- Волны Canvas (без изменений) -->
 <script>
     (function() {
         const canvas = document.getElementById('oceanCanvas');
