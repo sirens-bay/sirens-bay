@@ -377,6 +377,27 @@
             color: #1E6B6B;
         }
 
+        /* training section (optional) */
+        .training-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .training-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            max-width: 350px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .training-card i {
+            font-size: 3rem;
+            color: #FF7F6E;
+            margin-bottom: 20px;
+        }
+
         /* contacts */
         .contacts-flex {
             display: flex;
@@ -512,8 +533,8 @@
             <li><a href="#masters">Мастера</a></li>
             <li><a href="#portfolio">Портфолио</a></li>
             <li><a href="#" id="arnica-menu-link">Запись</a></li>
+            <li><a href="#training">Обучение</a></li>
             <li><a href="#contacts">Контакты</a></li>
-            <li><a href="#contacts">Обучение</a></li>
         </ul>
     </div>
 </header>
@@ -522,7 +543,7 @@
     <section class="hero">
         <div class="container hero-grid">
             <div class="hero-text">
-                <h1>🧜‍♀️ Sirens Bay - бухта, в которую возвращаются</h1>
+                <h1>🧜‍♀️ Sirens Bay | искусство быть собой</h1>
                 <p>Мы — студия в Новосибирске, где сочетаются качество, комфорт и продуманный образ 🧜‍♀️<br>
                 Здесь не нужно переживать «как сделают» и не нужно знать, чего ты хочешь 🌟<br>
                 🧜‍♀️ Мы подбираем и собираем образ под тебя так, чтобы ты чувствовала себя уверенно и ловила комплименты каждый день 🧜‍♀️</p>
@@ -561,7 +582,7 @@
                     <p class="service-desc">Классический, аппаратный, SPA-маникюр. Дизайн с морскими мотивами.</p>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-seashell"></i></div>
+                    <div class="service-icon"><i class="fas fa-water"></i></div>
                     <h3>Педикюр</h3>
                     <div class="service-price">от 2200 ₽</div>
                     <p class="service-desc">Медицинский, аппаратный, с покрытием. Комфорт и гигиена.</p>
@@ -620,6 +641,33 @@
         </div>
     </section>
 
+    <!-- Новая секция Обучение -->
+    <section id="training" style="background: #FEFCF8;">
+        <div class="container">
+            <h2 class="section-title">Обучение в Sirens Bay</h2>
+            <div class="training-grid">
+                <div class="training-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Курсы маникюра</h3>
+                    <p>Обучение с нуля и повышение квалификации. Индивидуальный подход, материалы включены.</p>
+                </div>
+                <div class="training-card">
+                    <i class="fas fa-paint-brush"></i>
+                    <h3>Дизайн и моделирование</h3>
+                    <p>Мастер-классы по морскому дизайну, лепке, аквадизайну.</p>
+                </div>
+                <div class="training-card">
+                    <i class="fas fa-laptop"></i>
+                    <h3>Онлайн-курсы</h3>
+                    <p>Учитесь из дома. Доступ к видеоурокам и обратная связь от преподавателей.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="#contacts" class="btn">Записаться на обучение</a>
+            </div>
+        </div>
+    </section>
+
     <section id="contacts">
         <div class="container">
             <h2 class="section-title">Наши контакты</h2>
@@ -654,11 +702,12 @@
 <script type="text/javascript" src="https://app.arnica.pro/booking/script/button/orgid/80812"></script>
 
 <script>
-    // Данные мастеров (без телефонов)
+    // Данные мастеров (с днём рождения)
     const masters = [
         {
             name: "Елена Губенко",
             photo: "Мастер1.jpg",
+            birthday: "15 марта 1990",
             experience: "8 лет",
             specialization: "Маникюр, педикюр, дизайн",
             education: "Высшее, Новосибирский технологический институт, дизайн ногтевого сервиса",
@@ -667,19 +716,20 @@
         {
             name: "Екатерина Риф",
             photo: "Мастер1.jpg",
+            birthday: "22 июля 1988",
             experience: "6 лет",
             specialization: "Брови, ресницы, ламинирование",
             education: "Курсы повышения квалификации по brow-арту, международный сертификат",
             about: "Екатерина придаёт взгляду выразительность, идеально подбирает форму бровей и объём ресниц."
         },
-
         {
-            name: "Ольга Песок",
+            name: "Мария Волна",
             photo: "Мастер1.jpg",
-            experience: "5 лет",
-            specialization: "Педикюр, SPA-уход, медицинский педикюр",
-            education: "Медицинское образование, сертификат по подологии",
-            about: "Ольга специализируется на комплексном уходе за стопами, использует только безопасные материалы."
+            birthday: "9 декабря 1995",
+            experience: "4 года",
+            specialization: "Маникюр, дизайн, покрытие",
+            education: "Школа ногтевого дизайна, победитель городских конкурсов",
+            about: "Мария создаёт нежные и стильные дизайны, учитывает все пожелания клиента."
         }
     ];
 
@@ -691,13 +741,12 @@
             const card = document.createElement('div');
             card.className = 'master-card';
             card.innerHTML = `
-                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://via.placeholder.com/180x180/FDF8F0/1E6B6B?text=Фото'">
+                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://placehold.co/180x180/FDF8F0/1E6B6B?text=Фото'">
                 <h3 class="master-name">${master.name}</h3>
                 <button class="master-details-btn" data-index="${index}">Подробнее</button>
             `;
             mastersGrid.appendChild(card);
         });
-        // Добавляем обработчики на кнопки
         document.querySelectorAll('.master-details-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const idx = btn.getAttribute('data-index');
@@ -715,9 +764,10 @@
 
     function showMasterModal(master) {
         modalPhoto.src = master.photo;
-        modalPhoto.onerror = () => { modalPhoto.src = 'https://via.placeholder.com/150x150/FDF8F0/1E6B6B?text=Фото'; };
+        modalPhoto.onerror = () => { modalPhoto.src = 'https://placehold.co/150x150/FDF8F0/1E6B6B?text=Фото'; };
         modalName.textContent = master.name;
         modalInfo.innerHTML = `
+            <p><strong>День рождения:</strong> ${master.birthday}</p>
             <p><strong>Стаж:</strong> ${master.experience}</p>
             <p><strong>Специализация:</strong> ${master.specialization}</p>
             <p><strong>Образование:</strong> ${master.education}</p>
@@ -768,7 +818,7 @@
     });
 </script>
 
-<!-- Волны Canvas (без изменений) -->
+<!-- Волны Canvas -->
 <script>
     (function() {
         const canvas = document.getElementById('oceanCanvas');
