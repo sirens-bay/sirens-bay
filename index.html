@@ -653,140 +653,99 @@
     });
 
     // ------ ЛОГИКА РАБОТЫ С ЗАПИСЬЮ (Google Sheets, без email) ------
-    let occupiedSlots = [];
-    // ВАША ССЫЛКА НА СКРИПТ (замените, если после переразвертывания изменилась)
-    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRJNywIcIm8tS-BbYHw17qvCCeKeNjyqD7wJqdDtEiPzYsuR2lX0H0yIkLxpG6s2BbwQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyRJNywIcIm8tS-BbYHw17qvCCeKeNjyqD7wJqdDtEiPzYsuR2lX0H0yIkLxpG6s2BbwQ/exec';
 
-    async function loadOccupiedSlots() {
-        try {
-            const response = await fetch(SCRIPT_URL);
-            if (!response.ok) throw new Error('Ошибка загрузки');
-            const data = await response.json();
-            occupiedSlots = data;
-            console.log('Загружено занятых слотов:', occupiedSlots.length);
-        } catch(e) {
-            console.error('Ошибка загрузки слотов:', e);
-            occupiedSlots = [];
-        }
+let occupiedSlots = [];
+
+async function loadOccupiedSlots() {
+    try {
+        const response = await fetch(SCRIPT_URL);
+        occupiedSlots = await response.json();
+        console.log('Загружено слотов:', occupiedSlots.length);
+    } catch(e) {
+        console.error(e);
+        occupiedSlots = [];
     }
+}
 
-    function generateTimeSlots(date) {
-        const slots = [];
-        for (let h = 10; h <= 20; h++) {
-            let timeStr = `${h.toString().padStart(2,'0')}:00`;
-            const isOccupied = occupiedSlots.some(slot => slot.date === date && slot.time === timeStr);
-            if (!isOccupied) {
-                slots.push(timeStr);
-            }
-        }
-        return slots;
+function generateTimeSlots(date) {
+    const slots = [];
+    for (let h = 10; h <= 20; h++) {
+        let timeStr = `${h.toString().padStart(2,'0')}:00`;
+        const isOccupied = occupiedSlots.some(slot => slot.date === date && slot.time === timeStr);
+        if (!isOccupied) slots.push(timeStr);
     }
+    return slots;
+}
 
-    const modalDateInput = document.getElementById('modalDate');
-    const modalTimeSelect = document.getElementById('modalTime');
+const modalDateInput = document.getElementById('modalDate');
+const modalTimeSelect = document.getElementById('modalTime');
 
-    modalDateInput.addEventListener('change', async function() {
-        const date = this.value;
-        if (!date) return;
-        await loadOccupiedSlots();
-        const slots = generateTimeSlots(date);
-        modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
-        if (slots.length === 0) {
-            modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
+modalDateInput.addEventListener('change', async function() {
+    const date = this.value;
+    if (!date) return;
+    await loadOccupiedSlots();
+    const slots = generateTimeSlots(date);
+    modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
+    if (slots.length === 0) {
+        modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
+        modalTimeSelect.disabled = true;
+    } else {
+        slots.forEach(slot => {
+            const option = document.createElement('option');
+            option.value = slot;
+            option.textContent = slot;
+            modalTimeSelect.appendChild(option);
+        });
+        modalTimeSelect.disabled = false;
+    }
+});
+
+const modalForm = document.getElementById('modalBookingForm');
+modalForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const submitBtn = this.querySelector('button[type="submit"]');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправка...';
+
+    const service = document.getElementById('modalService').value;
+    const date = document.getElementById('modalDate').value;
+    const time = document.getElementById('modalTime').value;
+    const name = document.getElementById('modalName').value;
+    const phone = document.getElementById('modalPhone').value;
+
+    const data = { service, date, time, name, phone };
+
+    try {
+        const response = await fetch(SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        const result = await response.json();
+        if (result.success) {
+            document.getElementById('modalMessage').innerHTML = '<span style="color: green;">✅ Заявка отправлена! Мы свяжемся с вами.</span>';
+            modalForm.reset();
+            modalTimeSelect.innerHTML = '<option value="">Сначала выберите дату</option>';
             modalTimeSelect.disabled = true;
+            await loadOccupiedSlots();
+            setTimeout(() => {
+                closeModal();
+                document.getElementById('modalMessage').innerHTML = '';
+            }, 3000);
         } else {
-            slots.forEach(slot => {
-                const option = document.createElement('option');
-                option.value = slot;
-                option.textContent = slot;
-                modalTimeSelect.appendChild(option);
-            });
-            modalTimeSelect.disabled = false;
+            document.getElementById('modalMessage').innerHTML = `<span style="color: red;">❌ ${result.error || 'Ошибка'}</span>`;
         }
-    });
+    } catch(err) {
+        console.error(err);
+        document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Ошибка соединения. Попробуйте позже.</span>';
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Записаться';
+    }
+});
 
-    const modalForm = document.getElementById('modalBookingForm');
-    modalForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const submitBtn = this.querySelector('button[type="submit"]');
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Отправка...';
-
-        const service = document.getElementById('modalService').value;
-        const date = document.getElementById('modalDate').value;
-        const time = document.getElementById('modalTime').value;
-        const name = document.getElementById('modalName').value;
-        const phone = document.getElementById('modalPhone').value;
-
-        // Проверка перед отправкой
-        await loadOccupiedSlots();
-        if (occupiedSlots.some(slot => slot.date === date && slot.time === time)) {
-            document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Это время только что заняли. Пожалуйста, выберите другое.</span>';
-            const slots = generateTimeSlots(date);
-            modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
-            if (slots.length === 0) {
-                modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
-                modalTimeSelect.disabled = true;
-            } else {
-                slots.forEach(slot => {
-                    const option = document.createElement('option');
-                    option.value = slot;
-                    option.textContent = slot;
-                    modalTimeSelect.appendChild(option);
-                });
-                modalTimeSelect.disabled = false;
-            }
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Записаться';
-            return;
-        }
-
-        const data = { service, date, time, name, phone };
-
-        try {
-            const response = await fetch(SCRIPT_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            });
-            const result = await response.json();
-            if (result.success) {
-                document.getElementById('modalMessage').innerHTML = '<span style="color: green;">✅ Заявка отправлена! Мы свяжемся с вами для подтверждения.</span>';
-                modalForm.reset();
-                modalTimeSelect.innerHTML = '<option value="">Сначала выберите дату</option>';
-                modalTimeSelect.disabled = true;
-                await loadOccupiedSlots();
-                setTimeout(() => {
-                    closeModal();
-                    document.getElementById('modalMessage').innerHTML = '';
-                }, 3000);
-            } else {
-                document.getElementById('modalMessage').innerHTML = `<span style="color: red;">❌ ${result.error || 'Ошибка записи'}</span>`;
-                const slots = generateTimeSlots(date);
-                modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
-                if (slots.length === 0) {
-                    modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
-                    modalTimeSelect.disabled = true;
-                } else {
-                    slots.forEach(slot => {
-                        const option = document.createElement('option');
-                        option.value = slot;
-                        option.textContent = slot;
-                        modalTimeSelect.appendChild(option);
-                    });
-                    modalTimeSelect.disabled = false;
-                }
-            }
-        } catch(err) {
-            console.error('Ошибка отправки:', err);
-            document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Ошибка соединения. Попробуйте позже или напишите нам в WhatsApp.</span>';
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Записаться';
-        }
-    });
-
-    loadOccupiedSlots();
+loadOccupiedSlots();
 
     // Мобильное меню и плавный скролл
     const mobileBtn = document.getElementById('mobile-menu');
