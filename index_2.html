@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Sirens Bay — маникюр, педикюр, брови, ресницы в морском стиле</title>
+    <meta name="description" content="Салон красоты Sirens Bay: дизайнерский маникюр, педикюр, брови, ресницы. Стерильность, спокойная атмосфера, морская эстетика. Онлайн-запись 24/7.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Raleway', sans-serif;
+            background-color: #ffffff;
+            color: #1A2A3A;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .logo, .nav-links a {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(255, 255, 255, 0.96);
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.03);
+            border-bottom: 1px solid rgba(30, 107, 107, 0.1);
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #1E6B6B;
+            text-decoration: none;
+        }
+        .logo span {
+            font-weight: 300;
+            color: #FF7F6E;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            color: #1A2A3A;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: #1E6B6B;
+        }
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            color: #1E6B6B;
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, #FDF8F0 0%, #ffffff 100%);
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 80px;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none"><path d="M0,64L80,69C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z" fill="%23ffffff" opacity="0.8"></path></svg>') repeat-x;
+            background-size: cover;
+        }
+        .hero-grid {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        .hero-text {
+            flex: 1;
+        }
+        .hero-text h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: #1E6B6B;
+        }
+        .hero-text p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #2c3e4e;
+        }
+        .btn {
+            display: inline-block;
+            background: #1E6B6B;
+            color: white;
+            padding: 14px 36px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Raleway', sans-serif;
+        }
+        .btn:hover {
+            background: #0e4f4f;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(30,107,107,0.2);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1E6B6B;
+            color: #1E6B6B;
+        }
+        .btn-outline:hover {
+            background: #1E6B6B;
+            color: white;
+        }
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+
+        /* sections */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #1A2A3A;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #FF7F6E;
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+
+        /* about */
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #2c3e4e;
+        }
+        .sterility-badge {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .badge-item {
+            text-align: center;
+            background: #FDF8F0;
+            padding: 15px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #1E6B6B;
+        }
+        .badge-item i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+        }
+
+        /* services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .service-card {
+            background: white;
+            border-radius: 30px;
+            padding: 30px 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid rgba(30,107,107,0.1);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(30,107,107,0.1);
+            border-color: rgba(30,107,107,0.3);
+        }
+        .service-icon {
+            font-size: 3rem;
+            color: #FF7F6E;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 10px;
+        }
+        .service-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1E6B6B;
+            margin: 15px 0;
+        }
+        .service-desc {
+            color: #5a6e7c;
+            font-size: 0.9rem;
+        }
+
+        /* portfolio */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .portfolio-item {
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            cursor: pointer;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* МОДАЛЬНОЕ ОКНО (онлайн-запись) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: white;
+            max-width: 550px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 30px 25px;
+            position: relative;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            animation: modalFadeIn 0.4s ease;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #1E6B6B;
+            transition: 0.2s;
+        }
+        .modal-close:hover {
+            color: #FF7F6E;
+        }
+        .modal h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1E6B6B;
+        }
+        .form-row {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-row label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1A2A3A;
+        }
+        .form-row input, .form-row select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 25px;
+            font-family: 'Raleway', sans-serif;
+            font-size: 1rem;
+        }
+        .form-row input:focus, .form-row select:focus {
+            outline: none;
+            border-color: #1E6B6B;
+        }
+        .modal .btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
+        }
+        #modalMessage {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        /* contacts */
+        .contacts-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: space-between;
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-info p {
+            margin: 20px 0;
+            font-size: 1.1rem;
+        }
+        .social-links a {
+            display: inline-block;
+            margin-right: 20px;
+            color: #1E6B6B;
+            font-size: 1.8rem;
+            transition: 0.2s;
+        }
+        .map {
+            flex: 1;
+            min-height: 300px;
+            background: #e0e6e9;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        footer {
+            background: #1A2A3A;
+            color: #ccc;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 40px;
+        }
+
+        /* responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                text-align: center;
+                gap: 1rem;
+                padding: 20px 0;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .hero-text h1 {
+                font-size: 2.4rem;
+            }
+            .hero-grid {
+                flex-direction: column;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+            }
+        }
+
+        /* Контейнер для canvas-волн */
+        #oceanCanvas {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            pointer-events: none;
+            display: block;
+        }
+        .ocean-overlay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(30,107,107,0.15), transparent);
+            pointer-events: none;
+            z-index: -1;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="oceanCanvas"></canvas>
+<div class="ocean-overlay"></div>
+
+<header>
+    <div class="container navbar">
+        <a href="#" class="logo">
+            <img src="logo.jpg" alt="Sirens Bay" style="height: 80px; width: 80px; object-fit: cover; border-radius: 50%;">
+        </a>
+        <div class="menu-toggle" id="mobile-menu">
+            <i class="fas fa-bars"></i>
+        </div>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#services">Услуги</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li><a href="#" id="modalOpenLink">Запись</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+    </div>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-text">
+                <h1>🧜‍♀️ Sirens Bay - бухта, в которую возвращаются</h1>
+                <p>Мы — студия в Новосибирске, где сочетаются качество, комфорт и продуманный образ 🧜‍♀️<br>
+                Здесь не нужно переживать «как сделают» и не нужно знать, чего ты хочешь 🌟<br>
+                🧜‍♀️ Мы подбираем и собираем образ под тебя так, чтобы ты чувствовала себя уверенно и ловила комплименты каждый день 🧜‍♀️</p>
+                <a href="#" id="showModalBtn" class="btn">Записаться онлайн</a>
+                <a href="#services" class="btn btn-outline" style="margin-left: 15px;">Услуги</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://sun9-1.userapi.com/s/v1/ig2/lQEQ2YdHpZ9j1ZfJ-5LuXjOW8IxVmantQQzhs378QucJDmrA8ozrYE9h0nkRiOnl2SdQ5U7LESTV9D2mq8F0x2DX.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&u=LX9Csl_770J41MWbLRjjaYWNaTmzjlBnmGvDSJJKgvc&cs=640x0" alt="Атмосфера Sirens Bay">
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">О бухте сирен</h2>
+            <div class="about-text">
+                <p>Sirens Bay — это пространство, где морская эстетика встречается с безупречной стерильностью. Мы создали место, в котором вы сможете отдохнуть от городского шторма, пока наши мастера творят дизайнерские шедевры. Каждый инструмент проходит сухожаровую обработку, одноразовые покрытия, воздух очищается.</p>
+            </div>
+            <div class="sterility-badge">
+                <div class="badge-item"><i class="fas fa-hand-sparkles"></i> Сухожаровая стерилизация</div>
+                <div class="badge-item"><i class="fas fa-clock"></i> Бесперебойная чистка</div>
+                <div class="badge-item"><i class="fas fa-feather-alt"></i> Эко-материалы</div>
+                <div class="badge-item"><i class="fas fa-water"></i> Морская атмосфера</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="background: #FEFCF8;">
+        <div class="container">
+            <h2 class="section-title">Наши процедуры</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-fish"></i></div>
+                    <h3>Маникюр</h3>
+                    <div class="service-price">от 1500 ₽</div>
+                    <p class="service-desc">Классический, аппаратный, SPA-маникюр. Дизайн с морскими мотивами.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shell"></i></div>
+                    <h3>Педикюр</h3>
+                    <div class="service-price">от 2200 ₽</div>
+                    <p class="service-desc">Медицинский, аппаратный, с покрытием. Комфорт и гигиена.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-feather"></i></div>
+                    <h3>Брови</h3>
+                    <div class="service-price">от 800 ₽</div>
+                    <p class="service-desc">Коррекция, окрашивание, ламинирование. Идеальная форма.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Ресницы</h3>
+                    <div class="service-price">от 1500 ₽</div>
+                    <p class="service-desc">Классика, 2D-5D объём, ламинирование. Безопасно.</p>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 40px;">
+                <p style="font-style: italic;">⭐ Массажное место откроется в ближайшее время — подпишитесь на новости!</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Наши работы</h2>
+            <div class="portfolio-grid" id="portfolio-grid">
+                <div class="portfolio-item"><img src="https://sun9-28.userapi.com/s/v1/ig2/JllfY9A57LK_nNBpqhW76iJ4MeYqOABq3bhKHa9zd9kUmOpBJP-TIBbN2p7C2wX4BS7YE1sLMmwyVD3Q1LvOIL65.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Работа маникюр"></div>
+                <div class="portfolio-item"><img src="https://sun9-8.userapi.com/s/v1/ig2/w-kQa5nd_wLgnjtlwzAhY_AIJQdUHY2GkeBI5sjLHbphNqm3OKpmpDC3lH0vE6WjeDh6zV9ERAvpPST6nTjsDyRK.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Педикюр"></div>
+                <div class="portfolio-item"><img src="https://sun9-72.userapi.com/s/v1/ig2/0TQlw0XM40RYzm419uDPMjBo_nn8eCUe0SXayzIK7AzQJUv7P8GjlSRoUhwViB1h7g4rBZCIUXG9UunK375dRimY.jpg?quality=95&as=32x13,48x19,72x29,108x43,160x63,240x95,360x143,480x190,540x214,640x254,720x286,1064x422&from=bu&u=TitZ5w2L3P_dTww_LIlHyHCoZ8Nf3-w6o2Ekr5v7OZc&cs=1064x0" alt="Брови"></div>
+                <div class="portfolio-item"><img src="https://sun9-22.userapi.com/s/v1/ig2/Ay1HuZGyuj8r81DqJmgBGle82AhioZpNVgFtDbEgPP6Z5mouPX3GJc8ISStnErGigtKKqQa53mcGhXFBCdWYB24i.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,1080x1440,1280x1707,1284x1712&from=bu&cs=1284x0" alt="Ресницы"></div>
+                <div class="portfolio-item"><img src="https://sun9-71.userapi.com/s/v1/ig2/LD6aalfy79LElvf19Gistrh8KwM2L8Wu25Vnt9m6uSSRqVY8oyqKoAvtiH6KdYUWLMUsk4mYUO-tjBkBOTngqfEu.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,960x1280&from=bu&u=mBbNIQWseTaMkZezaJXcRBJ96X-kl9b0F_aJaIfVTt4&cs=960x0" alt="Маникюр2"></div>  
+                <div class="portfolio-item"><img src="https://sun9-88.userapi.com/s/v1/ig2/jE_Bkpmz4U_EfQMvgjWwP7wZnlqZ-QJqRSuL9myTrsEAKxMio8SLc0q47wsKGCQpBXkCn2LJXvURGBQdq81gizJk.jpg?quality=95&as=32x43,48x64,72x96,108x144,160x213,240x320,360x480,480x640,540x720,640x853,720x960,960x1280&from=bu&u=EPeDGUonH_-ga7ddSBwl9BPApjwqf4THNG2CNdwCkNc&cs=960x0" alt="Маникюр3"></div>   
+            </div>
+        </div>
+    </section>
+
+    <section id="contacts">
+        <div class="container">
+            <h2 class="section-title">Наши контакты</h2>
+            <div class="contacts-flex">
+                <div class="contact-info">
+                    <p><i class="fas fa-map-marker-alt" style="color:#1E6B6B;"></i> г. Новосибирск, ул. Ленина, 12</p>
+                    <p><i class="fas fa-phone-alt"></i> +7 (995) 272-10-36</p>
+                    <p><i class="fab fa-instagram"></i> @sirensbay</p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp:+7 (995) 272-10-36</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-vk"></i></a>
+                    </div>
+                </div>
+                <div class="map">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1234567890&source=constructor" width="100%" height="100%" frameborder="0"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 Sirens Bay — бухта красоты и спокойствия</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Политика конфиденциальности | Дизайн с душой моря</p>
+    </div>
+</footer>
+
+<!-- МОДАЛЬНОЕ ОКНО ДЛЯ ЗАПИСИ -->
+<div id="bookingModal" class="modal">
+    <div class="modal-content">
+        <span class="modal-close">&times;</span>
+        <h2>Онлайн-запись</h2>
+        <form id="modalBookingForm">
+            <div class="form-row">
+                <label>Услуга:</label>
+                <select id="modalService" required>
+                    <option value="Маникюр">Маникюр — 1500 ₽</option>
+                    <option value="Педикюр">Педикюр — 2200 ₽</option>
+                    <option value="Брови">Брови — 800 ₽</option>
+                    <option value="Ресницы">Ресницы — 1500 ₽</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Дата:</label>
+                <input type="date" id="modalDate" required>
+            </div>
+            <div class="form-row">
+                <label>Время:</label>
+                <select id="modalTime" required disabled>
+                    <option value="">Сначала выберите дату</option>
+                </select>
+            </div>
+            <div class="form-row">
+                <label>Ваше имя:</label>
+                <input type="text" id="modalName" required>
+            </div>
+            <div class="form-row">
+                <label>Телефон:</label>
+                <input type="tel" id="modalPhone" required>
+            </div>
+            <button type="submit" class="btn">Записаться</button>
+        </form>
+        <div id="modalMessage"></div>
+    </div>
+</div>
+
+<script>
+    // Модальное окно
+    const modal = document.getElementById('bookingModal');
+    const openBtns = document.querySelectorAll('#showModalBtn, #modalOpenLink');
+    const closeBtn = document.querySelector('.modal-close');
+
+    function openModal() {
+        modal.style.display = 'flex';
+    }
+    function closeModal() {
+        modal.style.display = 'none';
+        document.getElementById('modalMessage').innerHTML = '';
+    }
+
+    openBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            openModal();
+        });
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    // ------ ЛОГИКА РАБОТЫ С ЗАПИСЬЮ (Google Sheets, без email) ------
+    let occupiedSlots = [];
+    // ВАША ССЫЛКА НА СКРИПТ
+    const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSpbTO6x_nIwyuX-b-K3iMpINeLYqQ9OGmXavO1P5c0YFFDiU3XTH4C_Gv2LN0oxrqGw/exec';
+
+    async function loadOccupiedSlots() {
+        try {
+            const response = await fetch(SCRIPT_URL);
+            if (!response.ok) throw new Error('Ошибка загрузки');
+            const data = await response.json();
+            occupiedSlots = data;
+            console.log('Загружено занятых слотов:', occupiedSlots.length);
+        } catch(e) {
+            console.error('Ошибка загрузки слотов:', e);
+            occupiedSlots = [];
+        }
+    }
+
+    function generateTimeSlots(date) {
+        const slots = [];
+        for (let h = 10; h <= 20; h++) {
+            let timeStr = `${h.toString().padStart(2,'0')}:00`;
+            const isOccupied = occupiedSlots.some(slot => slot.date === date && slot.time === timeStr);
+            if (!isOccupied) {
+                slots.push(timeStr);
+            }
+        }
+        return slots;
+    }
+
+    const modalDateInput = document.getElementById('modalDate');
+    const modalTimeSelect = document.getElementById('modalTime');
+
+    modalDateInput.addEventListener('change', async function() {
+        const date = this.value;
+        if (!date) return;
+        await loadOccupiedSlots();
+        const slots = generateTimeSlots(date);
+        modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
+        if (slots.length === 0) {
+            modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
+            modalTimeSelect.disabled = true;
+        } else {
+            slots.forEach(slot => {
+                const option = document.createElement('option');
+                option.value = slot;
+                option.textContent = slot;
+                modalTimeSelect.appendChild(option);
+            });
+            modalTimeSelect.disabled = false;
+        }
+    });
+
+    const modalForm = document.getElementById('modalBookingForm');
+    modalForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Отправка...';
+
+        const service = document.getElementById('modalService').value;
+        const date = document.getElementById('modalDate').value;
+        const time = document.getElementById('modalTime').value;
+        const name = document.getElementById('modalName').value;
+        const phone = document.getElementById('modalPhone').value;
+
+        // Проверка перед отправкой
+        await loadOccupiedSlots();
+        if (occupiedSlots.some(slot => slot.date === date && slot.time === time)) {
+            document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Это время только что заняли. Пожалуйста, выберите другое.</span>';
+            const slots = generateTimeSlots(date);
+            modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
+            if (slots.length === 0) {
+                modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
+                modalTimeSelect.disabled = true;
+            } else {
+                slots.forEach(slot => {
+                    const option = document.createElement('option');
+                    option.value = slot;
+                    option.textContent = slot;
+                    modalTimeSelect.appendChild(option);
+                });
+                modalTimeSelect.disabled = false;
+            }
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Записаться';
+            return;
+        }
+
+        const data = { service, date, time, name, phone };
+
+        try {
+            const response = await fetch(SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            const result = await response.json();
+            if (result.success) {
+                document.getElementById('modalMessage').innerHTML = '<span style="color: green;">✅ Заявка отправлена! Мы свяжемся с вами для подтверждения.</span>';
+                modalForm.reset();
+                modalTimeSelect.innerHTML = '<option value="">Сначала выберите дату</option>';
+                modalTimeSelect.disabled = true;
+                await loadOccupiedSlots();
+                setTimeout(() => {
+                    closeModal();
+                    document.getElementById('modalMessage').innerHTML = '';
+                }, 3000);
+            } else {
+                document.getElementById('modalMessage').innerHTML = `<span style="color: red;">❌ ${result.error || 'Ошибка записи'}</span>`;
+                const slots = generateTimeSlots(date);
+                modalTimeSelect.innerHTML = '<option value="">Выберите время</option>';
+                if (slots.length === 0) {
+                    modalTimeSelect.innerHTML = '<option value="">Нет свободного времени</option>';
+                    modalTimeSelect.disabled = true;
+                } else {
+                    slots.forEach(slot => {
+                        const option = document.createElement('option');
+                        option.value = slot;
+                        option.textContent = slot;
+                        modalTimeSelect.appendChild(option);
+                    });
+                    modalTimeSelect.disabled = false;
+                }
+            }
+        } catch(err) {
+            console.error('Ошибка отправки:', err);
+            document.getElementById('modalMessage').innerHTML = '<span style="color: red;">❌ Ошибка соединения. Попробуйте позже или напишите нам в WhatsApp.</span>';
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Записаться';
+        }
+    });
+
+    loadOccupiedSlots();
+
+    // Мобильное меню и плавный скролл
+    const mobileBtn = document.getElementById('mobile-menu');
+    const navLinks = document.getElementById('nav-links');
+    mobileBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a:not([href="#"])').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#') {
+                e.preventDefault();
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+                }
+            }
+        });
+    });
+</script>
+
+<!-- Волны Canvas -->
+<script>
+    (function() {
+        const canvas = document.getElementById('oceanCanvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width, height;
+        const waves = [
+            { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(30, 107, 107, 0.35)', yOffset: 0.25, lineWidth: 2 },
+            { amplitude: 40, period: 0.012, speed: 0.025, phase: 1.2, color: 'rgba(44, 140, 140, 0.4)', yOffset: 0.32, lineWidth: 2.5 },
+            { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(26, 90, 90, 0.45)', yOffset: 0.4, lineWidth: 3 },
+            { amplitude: 70, period: 0.025, speed: 0.048, phase: 3.8, color: 'rgba(20, 70, 70, 0.5)', yOffset: 0.5, lineWidth: 3.5 },
+            { amplitude: 18, period: 0.03, speed: 0.06, phase: 5.0, color: 'rgba(255, 255, 240, 0.25)', yOffset: 0.22, lineWidth: 1.5 }
+        ];
+        let time = 0;
+        let animationId;
+
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+
+        function drawWave(ctx, wave, time) {
+            const step = width / 120;
+            ctx.beginPath();
+            let x = 0;
+            let yBase = height * wave.yOffset;
+            ctx.moveTo(x, yBase + Math.sin(x * wave.period + time * wave.speed + wave.phase) * wave.amplitude);
+            for (let x = 0; x <= width; x += step) {
+                let y = yBase + Math.sin(x * wave.period + time * wave.speed + wave.phase) * wave.amplitude;
+                y += Math.sin(x * 0.003 + time * 0.8) * (wave.amplitude * 0.15);
+                ctx.lineTo(x, y);
+            }
+            ctx.lineTo(width, height);
+            ctx.lineTo(0, height);
+            ctx.closePath();
+            ctx.fillStyle = wave.color;
+            ctx.fill();
+            if (wave.lineWidth > 0) {
+                ctx.beginPath();
+                for (let x = 0; x <= width; x += step) {
+                    let y = yBase + Math.sin(x * wave.period + time * wave.speed + wave.phase) * wave.amplitude;
+                    if (x === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                }
+                ctx.strokeStyle = 'rgba(255,255,245,0.3)';
+                ctx.lineWidth = wave.lineWidth * 0.6;
+                ctx.stroke();
+            }
+        }
+
+        function drawFoam() {
+            ctx.globalCompositeOperation = 'lighter';
+            for (let i = 0; i < 60; i++) {
+                let x = (Math.sin(time * 0.2 + i) * 0.5 + 0.5) * width;
+                let yBase = height * 0.6;
+                let y = yBase + Math.sin(x * 0.02 + time * 2) * 15;
+                let radius = 2 + Math.sin(time * 3 + i) * 1.5;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 250, 220, ${0.1 + Math.sin(time*5 + i)*0.05})`;
+                ctx.fill();
+            }
+            ctx.globalCompositeOperation = 'source-over';
+        }
+
+        function drawGradientBackground() {
+            const grad = ctx.createLinearGradient(0, 0, 0, height);
+            grad.addColorStop(0, '#FDF8F0');
+            grad.addColorStop(0.5, '#E9F0EF');
+            grad.addColorStop(1, '#B2D8D8');
+            ctx.fillStyle = grad;
+            ctx.fillRect(0, 0, width, height);
+        }
+
+        function animate() {
+            if (!ctx) return;
+            drawGradientBackground();
+            for (let w of waves) drawWave(ctx, w, time);
+            drawFoam();
+            ctx.globalCompositeOperation = 'overlay';
+            for (let i = 0; i < 12; i++) {
+                let x = width * (0.2 + Math.sin(time * 0.1 + i) * 0.15);
+                let y = height * (0.3 + Math.cos(time * 0.07 + i) * 0.05);
+                let radGrad = ctx.createRadialGradient(x, y, 5, x+15, y+10, 60);
+                radGrad.addColorStop(0, 'rgba(255,255,200,0.2)');
+                radGrad.addColorStop(1, 'rgba(255,255,200,0)');
+                ctx.fillStyle = radGrad;
+                ctx.fillRect(0, 0, width, height);
+            }
+            ctx.globalCompositeOperation = 'source-over';
+            time += 0.025;
+            animationId = requestAnimationFrame(animate);
+        }
+
+        window.addEventListener('resize', () => resizeCanvas());
+        resizeCanvas();
+        animate();
+        window.addEventListener('beforeunload', () => { if (animationId) cancelAnimationFrame(animationId); });
+    })();
+</script>
+</body>
+</html>
