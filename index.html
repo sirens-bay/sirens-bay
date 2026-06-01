@@ -248,27 +248,128 @@
             font-size: 0.9rem;
         }
 
-        /* portfolio */
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+        /* portfolio new */
+        .portfolio-master-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
         }
-        .portfolio-item {
-            overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: 0.3s;
+        .portfolio-masters-list {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .master-portfolio-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px;
+            background: white;
+            border-radius: 30px;
             cursor: pointer;
+            transition: 0.3s;
+            border: 1px solid rgba(30,107,107,0.2);
         }
-        .portfolio-item img {
-            width: 100%;
-            height: 300px;
+        .master-portfolio-item.active {
+            border-color: #FF7F6E;
+            background: #FFF8F0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .master-portfolio-photo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
             object-fit: cover;
-            transition: 0.5s;
+            border: 2px solid #1E6B6B;
         }
-        .portfolio-item:hover img {
-            transform: scale(1.05);
+        .master-portfolio-name {
+            font-weight: 600;
+            font-size: 1.2rem;
+            color: #1A2A3A;
+        }
+        .portfolio-carousel-area {
+            flex: 3;
+            min-width: 280px;
+        }
+        .carousel-container {
+            position: relative;
+            background: white;
+            border-radius: 30px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+        }
+        .carousel-prev, .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.7);
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            color: #1E6B6B;
+            transition: 0.3s;
+            z-index: 10;
+        }
+        .carousel-prev:hover, .carousel-next:hover {
+            background: #FF7F6E;
+            color: white;
+        }
+        .carousel-prev {
+            left: 10px;
+        }
+        .carousel-next {
+            right: 10px;
+        }
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ccc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .carousel-dot.active {
+            background: #FF7F6E;
+        }
+        @media (max-width: 768px) {
+            .portfolio-master-container {
+                flex-direction: column;
+            }
+            .portfolio-masters-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .master-portfolio-item {
+                width: calc(50% - 10px);
+            }
+            .carousel-slide img {
+                height: 250px;
+            }
         }
 
         /* masters section */
@@ -377,7 +478,7 @@
             color: #1E6B6B;
         }
 
-        /* training section (optional) */
+        /* training section */
         .training-grid {
             display: flex;
             justify-content: center;
@@ -606,7 +707,7 @@
         </div>
     </section>
 
-    <!-- Секция Мастера -->
+    <!-- Секция Мастера (карточки + модалки) -->
     <section id="masters" style="background: #FDF8F0;">
         <div class="container">
             <h2 class="section-title">Наши мастера</h2>
@@ -624,24 +725,27 @@
         </div>
     </div>
 
-    <section id="portfolio">
+    <!-- НОВАЯ СЕКЦИЯ ПОРТФОЛИО (мастера + карусель работ) -->
+    <section id="portfolio" style="background: #FDF8F0;">
         <div class="container">
             <h2 class="section-title">Наши работы</h2>
-            <div class="portfolio-grid" id="portfolio-grid">
-                <div class="portfolio-item"><img src="маникюр1.jpg" alt="Маникюр"></div>
-                <div class="portfolio-item"><img src="педикюр1.jpg" alt="Педикюр"></div>
-                <div class="portfolio-item"><img src="брови1.jpg" alt="Брови"></div>
-                <div class="portfolio-item"><img src="ресницы1.jpg" alt="Ресницы"></div>
-                <div class="portfolio-item"><img src="маникюр2.jpg" alt="Маникюр2"></div>  
-                <div class="portfolio-item"><img src="маникюр3.jpg" alt="Маникюр3"></div>
-                <div class="portfolio-item"><img src="маникюр4.jpg" alt="Маникюр4"></div>  
-                <div class="portfolio-item"><img src="маникюр5.jpg" alt="Маникюр5"></div>  
-                <div class="portfolio-item"><img src="маникюр6.jpg" alt="Маникюр6"></div>   
+            <div class="portfolio-master-container">
+                <!-- Левая колонка: мастера -->
+                <div class="portfolio-masters-list" id="portfolioMastersList"></div>
+                <!-- Правая колонка: карусель работ -->
+                <div class="portfolio-carousel-area" id="portfolioCarouselArea">
+                    <div class="carousel-container">
+                        <div class="carousel-slides" id="carouselSlides"></div>
+                        <button class="carousel-prev" id="carouselPrev">&#10094;</button>
+                        <button class="carousel-next" id="carouselNext">&#10095;</button>
+                    </div>
+                    <div class="carousel-indicators" id="carouselIndicators"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Новая секция Обучение -->
+    <!-- Секция Обучение -->
     <section id="training" style="background: #FEFCF8;">
         <div class="container">
             <h2 class="section-title">Обучение в Sirens Bay</h2>
@@ -702,7 +806,7 @@
 <script type="text/javascript" src="https://app.arnica.pro/booking/script/button/orgid/80812"></script>
 
 <script>
-    // Данные мастеров (с днём рождения)
+    // Данные мастеров (для карточек и модалки, с днями рождения)
     const masters = [
         {
             name: "Елена Губенко",
@@ -711,7 +815,13 @@
             experience: "8 лет",
             specialization: "Маникюр, педикюр, дизайн",
             education: "Высшее, Новосибирский технологический институт, дизайн ногтевого сервиса",
-            about: "Елена — главный мастер салона, создаёт уникальные дизайны с морской тематикой. Любит экспериментировать с текстурами и стразами."
+            about: "Елена — главный мастер салона, создаёт уникальные дизайны с морской тематикой. Любит экспериментировать с текстурами и стразами.",
+            works: [
+                "маникюр1.jpg",
+                "маникюр2.jpg",
+                "маникюр3.jpg",
+                "маникюр4.jpg"
+            ]
         },
         {
             name: "Екатерина Риф",
@@ -720,7 +830,13 @@
             experience: "6 лет",
             specialization: "Брови, ресницы, ламинирование",
             education: "Курсы повышения квалификации по brow-арту, международный сертификат",
-            about: "Екатерина придаёт взгляду выразительность, идеально подбирает форму бровей и объём ресниц."
+            about: "Екатерина придаёт взгляду выразительность, идеально подбирает форму бровей и объём ресниц.",
+            works: [
+                 "маникюр1.jpg",
+                "маникюр2.jpg",
+                "маникюр3.jpg",
+                "маникюр4.jpg"
+            ]
         },
         {
             name: "Мария Волна",
@@ -729,11 +845,17 @@
             experience: "4 года",
             specialization: "Маникюр, дизайн, покрытие",
             education: "Школа ногтевого дизайна, победитель городских конкурсов",
-            about: "Мария создаёт нежные и стильные дизайны, учитывает все пожелания клиента."
+            about: "Мария создаёт нежные и стильные дизайны, учитывает все пожелания клиента.",
+            works: [
+                 "маникюр1.jpg",
+                "маникюр2.jpg",
+                "маникюр3.jpg",
+                "маникюр4.jpg"
+            ]
         }
     ];
 
-    // Генерация карточек мастеров
+    // --- Генерация карточек мастеров (секция "Мастера") ---
     const mastersGrid = document.getElementById('mastersGrid');
     function renderMasters() {
         mastersGrid.innerHTML = '';
@@ -755,7 +877,7 @@
         });
     }
 
-    // Модальное окно
+    // Модальное окно мастера
     const masterModal = document.getElementById('masterModal');
     const modalClose = document.querySelector('.master-modal-close');
     const modalPhoto = document.getElementById('modalMasterPhoto');
@@ -785,6 +907,114 @@
 
     renderMasters();
 
+    // --- Логика портфолио (мастера + карусель работ) ---
+    let currentMasterIndex = 0;
+    let currentSlideIndex = 0;
+    let autoSlideInterval;
+
+    function renderPortfolioMasters() {
+        const container = document.getElementById('portfolioMastersList');
+        if (!container) return;
+        container.innerHTML = '';
+        masters.forEach((master, idx) => {
+            const masterDiv = document.createElement('div');
+            masterDiv.className = 'master-portfolio-item';
+            if (idx === currentMasterIndex) masterDiv.classList.add('active');
+            masterDiv.innerHTML = `
+                <img src="${master.photo}" alt="${master.name}" class="master-portfolio-photo" onerror="this.src='https://placehold.co/70x70/FDF8F0/1E6B6B?text=Фото'">
+                <div class="master-portfolio-name">${master.name}</div>
+            `;
+            masterDiv.addEventListener('click', () => {
+                currentMasterIndex = idx;
+                currentSlideIndex = 0;
+                renderPortfolioMasters(); // обновить активный класс
+                renderCarousel(masters[currentMasterIndex].works);
+                resetAutoSlide();
+            });
+            container.appendChild(masterDiv);
+        });
+    }
+
+    function renderCarousel(worksArray) {
+        const slidesContainer = document.getElementById('carouselSlides');
+        const indicatorsContainer = document.getElementById('carouselIndicators');
+        if (!slidesContainer) return;
+        slidesContainer.innerHTML = '';
+        indicatorsContainer.innerHTML = '';
+        if (!worksArray.length) {
+            slidesContainer.innerHTML = '<div class="carousel-slide"><img src="https://placehold.co/600x400/FDF8F0/1E6B6B?text=Нет+работ" alt="Нет фото"></div>';
+            return;
+        }
+        worksArray.forEach((imgSrc, idx) => {
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            slide.innerHTML = `<img src="${imgSrc}" alt="Работа мастера" loading="lazy">`;
+            slidesContainer.appendChild(slide);
+            
+            const dot = document.createElement('div');
+            dot.className = 'carousel-dot';
+            if (idx === currentSlideIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                currentSlideIndex = idx;
+                updateCarouselPosition();
+                resetAutoSlide();
+            });
+            indicatorsContainer.appendChild(dot);
+        });
+        updateCarouselPosition();
+        startAutoSlide();
+    }
+
+    function updateCarouselPosition() {
+        const slidesContainer = document.getElementById('carouselSlides');
+        if (!slidesContainer) return;
+        const slideWidth = slidesContainer.clientWidth;
+        slidesContainer.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
+        // обновить активную точку
+        const dots = document.querySelectorAll('.carousel-dot');
+        dots.forEach((dot, i) => {
+            if (i === currentSlideIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function nextSlide() {
+        const works = masters[currentMasterIndex].works;
+        if (!works.length) return;
+        currentSlideIndex = (currentSlideIndex + 1) % works.length;
+        updateCarouselPosition();
+    }
+
+    function prevSlide() {
+        const works = masters[currentMasterIndex].works;
+        if (!works.length) return;
+        currentSlideIndex = (currentSlideIndex - 1 + works.length) % works.length;
+        updateCarouselPosition();
+    }
+
+    function startAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
+        autoSlideInterval = setInterval(() => {
+            nextSlide();
+        }, 3000);
+    }
+
+    function resetAutoSlide() {
+        if (autoSlideInterval) clearInterval(autoSlideInterval);
+        startAutoSlide();
+    }
+
+    // При загрузке страницы запустить портфолио
+    if (document.getElementById('portfolioMastersList')) {
+        renderPortfolioMasters();
+        renderCarousel(masters[0].works);
+        // Кнопки карусели
+        document.getElementById('carouselPrev')?.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
+        document.getElementById('carouselNext')?.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
+        // При ресайзе окна пересчитать позицию
+        window.addEventListener('resize', () => updateCarouselPosition());
+    }
+
     // Обработчик для пункта меню "Запись" через Arnica
     document.getElementById('arnica-menu-link').addEventListener('click', function(e) {
         e.preventDefault();
@@ -802,7 +1032,7 @@
         navLinks.classList.toggle('active');
     });
 
-    // Плавный скролл для ссылок навигации (кроме пункта "Запись", у него своё поведение)
+    // Плавный скролл для ссылок навигации (кроме пункта "Запись")
     document.querySelectorAll('.nav-links a:not([href="#"])').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const targetId = this.getAttribute('href');
