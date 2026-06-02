@@ -180,33 +180,33 @@
         }
 
         /* about */
-.about-text {
-    max-width: 800px;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 1.1rem;
-    color: #2c3e4e;
-}
-.sterility-badge {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
-    margin-top: 40px;
-}
-.badge-item {
-    text-align: center;
-    background: #79D0F2;
-    padding: 15px 25px;
-    border-radius: 60px;
-    font-weight: 600;
-    color: #1A2A3A;
-}
-.badge-item i {
-    margin-right: 8px;
-    font-size: 1.2rem;
-    color: #1A2A3A; /* цвет иконки тоже можно оставить тёмным */
-}
+        .about-text {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #2c3e4e;
+        }
+        .sterility-badge {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        .badge-item {
+            text-align: center;
+            background: #79D0F2;
+            padding: 15px 25px;
+            border-radius: 60px;
+            font-weight: 600;
+            color: #1A2A3A;
+        }
+        .badge-item i {
+            margin-right: 8px;
+            font-size: 1.2rem;
+            color: #1A2A3A;
+        }
 
         /* services */
         .services-grid {
@@ -481,6 +481,78 @@
             color: #79D0F2;
         }
 
+        /* Модальное окно для обучения */
+        .training-modal {
+            display: none;
+            position: fixed;
+            z-index: 2001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            backdrop-filter: blur(4px);
+            justify-content: center;
+            align-items: center;
+        }
+        .training-modal-content {
+            background: white;
+            max-width: 450px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .training-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #79D0F2;
+            transition: 0.2s;
+        }
+        .training-modal-close:hover {
+            color: #1A2A3A;
+        }
+        .training-modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #1A2A3A;
+        }
+        .tg-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #79D0F2;
+            color: #1A2A3A;
+            padding: 12px 24px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .tg-button:hover {
+            background: #89C9F9;
+            transform: translateY(-3px);
+        }
+        .tg-button i {
+            font-size: 1.3rem;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* training section */
         .training-grid {
             display: flex;
@@ -732,7 +804,7 @@
         </div>
     </div>
 
-    <!-- НОВАЯ СЕКЦИЯ ПОРТФОЛИО (мастера + карусель работ) -->
+    <!-- Секция портфолио (мастера + карусель работ) -->
     <section id="portfolio" style="background: #F0F9FF;">
         <div class="container">
             <h2 class="section-title">Наши работы</h2>
@@ -772,7 +844,7 @@
                 </div>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="#contacts" class="btn">Записаться на обучение</a>
+                <a href="#" id="trainingBtn" class="btn">Записаться на обучение</a>
             </div>
         </div>
     </section>
@@ -806,6 +878,17 @@
         <p style="margin-top: 10px; font-size: 0.8rem;">Политика конфиденциальности | Дизайн с душой</p>
     </div>
 </footer>
+
+<!-- Модальное окно для обучения (добавлено) -->
+<div id="trainingModal" class="training-modal">
+    <div class="training-modal-content">
+        <span class="training-modal-close">&times;</span>
+        <p>По всем вопросам по поводу обучения писать сюда:</p>
+        <a href="https://t.me/@Helena_Ale" target="_blank" class="tg-button">
+            <i class="fab fa-telegram"></i> Написать в Telegram
+        </a>
+    </div>
+</div>
 
 <!-- Скрипт Arnica -->
 <script type="text/javascript" src="https://app.arnica.pro/booking/script/button/orgid/80812"></script>
@@ -1023,6 +1106,30 @@
             onlineBooking.open();
         } else {
             alert("Система записи загружается, попробуйте еще раз.");
+        }
+    });
+
+    // Модальное окно для обучения
+    const trainingModal = document.getElementById('trainingModal');
+    const trainingBtn = document.getElementById('trainingBtn');
+    const trainingClose = document.querySelector('.training-modal-close');
+
+    if (trainingBtn) {
+        trainingBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            trainingModal.style.display = 'flex';
+        });
+    }
+
+    if (trainingClose) {
+        trainingClose.addEventListener('click', () => {
+            trainingModal.style.display = 'none';
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (e.target === trainingModal) {
+            trainingModal.style.display = 'none';
         }
     });
 
