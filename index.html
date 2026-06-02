@@ -42,7 +42,7 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 20px rgba(0,0,0,0.03);
-            border-bottom: 1px solid rgba(30, 107, 107, 0.1);
+            border-bottom: 1px solid rgba(121, 208, 242, 0.3);
         }
         .navbar {
             display: flex;
@@ -55,12 +55,12 @@
             font-size: 1.8rem;
             font-weight: 600;
             letter-spacing: 2px;
-            color: #1E6B6B;
+            color: #79D0F2;
             text-decoration: none;
         }
         .logo span {
             font-weight: 300;
-            color: #FF7F6E;
+            color: #89C9F9;
         }
         .nav-links {
             display: flex;
@@ -75,18 +75,18 @@
             font-size: 1rem;
         }
         .nav-links a:hover, .nav-links a.active {
-            color: #1E6B6B;
+            color: #79D0F2;
         }
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
             cursor: pointer;
-            color: #1E6B6B;
+            color: #79D0F2;
         }
 
         /* Hero */
         .hero {
-            background: linear-gradient(135deg, #FDF8F0 0%, #ffffff 100%);
+            background: linear-gradient(135deg, #B3E0F2 0%, #AEDFFF 100%);
             padding: 80px 0 100px;
             position: relative;
             overflow: hidden;
@@ -114,7 +114,7 @@
             font-size: 3.5rem;
             line-height: 1.2;
             margin-bottom: 1rem;
-            color: #1E6B6B;
+            color: #1A2A3A;
         }
         .hero-text p {
             font-size: 1.2rem;
@@ -123,8 +123,8 @@
         }
         .btn {
             display: inline-block;
-            background: #1E6B6B;
-            color: white;
+            background: #79D0F2;
+            color: #1A2A3A;
             padding: 14px 36px;
             border-radius: 40px;
             text-decoration: none;
@@ -135,17 +135,17 @@
             font-family: 'Raleway', sans-serif;
         }
         .btn:hover {
-            background: #0e4f4f;
+            background: #89C9F9;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(30,107,107,0.2);
+            box-shadow: 0 10px 20px rgba(121, 208, 242, 0.3);
         }
         .btn-outline {
             background: transparent;
-            border: 2px solid #1E6B6B;
-            color: #1E6B6B;
+            border: 2px solid #79D0F2;
+            color: #1A2A3A;
         }
         .btn-outline:hover {
-            background: #1E6B6B;
+            background: #79D0F2;
             color: white;
         }
         .hero-image {
@@ -174,38 +174,39 @@
             display: block;
             width: 80px;
             height: 3px;
-            background: #FF7F6E;
+            background: #79D0F2;
             margin: 15px auto 0;
             border-radius: 3px;
         }
 
         /* about */
-        .about-text {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-            color: #2c3e4e;
-        }
-        .sterility-badge {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        .badge-item {
-            text-align: center;
-            background: #FDF8F0;
-            padding: 15px 25px;
-            border-radius: 60px;
-            font-weight: 600;
-            color: #1E6B6B;
-        }
-        .badge-item i {
-            margin-right: 8px;
-            font-size: 1.2rem;
-        }
+.about-text {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    font-size: 1.1rem;
+    color: #2c3e4e;
+}
+.sterility-badge {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+}
+.badge-item {
+    text-align: center;
+    background: #79D0F2;
+    padding: 15px 25px;
+    border-radius: 60px;
+    font-weight: 600;
+    color: #1A2A3A;
+}
+.badge-item i {
+    margin-right: 8px;
+    font-size: 1.2rem;
+    color: #1A2A3A; /* цвет иконки тоже можно оставить тёмным */
+}
 
         /* services */
         .services-grid {
@@ -221,16 +222,16 @@
             text-align: center;
             transition: all 0.3s;
             box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            border: 1px solid rgba(30,107,107,0.1);
+            border: 1px solid rgba(121, 208, 242, 0.3);
         }
         .service-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(30,107,107,0.1);
-            border-color: rgba(30,107,107,0.3);
+            box-shadow: 0 20px 35px rgba(121, 208, 242, 0.2);
+            border-color: #79D0F2;
         }
         .service-icon {
             font-size: 3rem;
-            color: #FF7F6E;
+            color: #79D0F2;
             margin-bottom: 20px;
         }
         .service-card h3 {
@@ -240,7 +241,7 @@
         .service-price {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #1E6B6B;
+            color: #79D0F2;
             margin: 15px 0;
         }
         .service-desc {
@@ -270,11 +271,11 @@
             border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
-            border: 1px solid rgba(30,107,107,0.2);
+            border: 1px solid rgba(121, 208, 242, 0.3);
         }
         .master-portfolio-item.active {
-            border-color: #FF7F6E;
-            background: #FFF8F0;
+            border-color: #79D0F2;
+            background: #AEDFFF;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         .master-portfolio-photo {
@@ -282,7 +283,7 @@
             height: 70px;
             border-radius: 50%;
             object-fit: cover;
-            border: 2px solid #1E6B6B;
+            border: 2px solid #79D0F2;
         }
         .master-portfolio-name {
             font-weight: 600;
@@ -324,12 +325,12 @@
             cursor: pointer;
             padding: 10px 15px;
             border-radius: 50%;
-            color: #1E6B6B;
+            color: #79D0F2;
             transition: 0.3s;
             z-index: 10;
         }
         .carousel-prev:hover, .carousel-next:hover {
-            background: #FF7F6E;
+            background: #79D0F2;
             color: white;
         }
         .carousel-prev {
@@ -348,12 +349,12 @@
             width: 12px;
             height: 12px;
             border-radius: 50%;
-            background: #ccc;
+            background: #B3E0F2;
             cursor: pointer;
             transition: 0.3s;
         }
         .carousel-dot.active {
-            background: #FF7F6E;
+            background: #79D0F2;
         }
         @media (max-width: 768px) {
             .portfolio-master-container {
@@ -386,10 +387,11 @@
             text-align: center;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             transition: 0.3s;
-            border: 1px solid rgba(30,107,107,0.1);
+            border: 1px solid rgba(121, 208, 242, 0.3);
         }
         .master-card:hover {
             transform: translateY(-5px);
+            border-color: #79D0F2;
         }
         .master-photo {
             width: 180px;
@@ -397,17 +399,17 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            border: 3px solid #1E6B6B;
+            border: 3px solid #79D0F2;
         }
         .master-name {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: 10px;
-            color: #1E6B6B;
+            color: #79D0F2;
         }
         .master-details-btn {
-            background: #FF7F6E;
-            color: white;
+            background: #79D0F2;
+            color: #1A2A3A;
             border: none;
             padding: 8px 20px;
             border-radius: 30px;
@@ -417,7 +419,8 @@
             transition: 0.3s;
         }
         .master-details-btn:hover {
-            background: #e56b5a;
+            background: #89C9F9;
+            transform: translateY(-2px);
         }
 
         /* Модальное окно мастера */
@@ -452,7 +455,7 @@
             right: 20px;
             font-size: 28px;
             cursor: pointer;
-            color: #1E6B6B;
+            color: #79D0F2;
         }
         .master-modal-photo {
             width: 150px;
@@ -460,7 +463,7 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 20px;
-            border: 3px solid #FF7F6E;
+            border: 3px solid #79D0F2;
         }
         .master-modal-name {
             font-size: 1.8rem;
@@ -475,7 +478,7 @@
             font-size: 1rem;
         }
         .master-modal-info strong {
-            color: #1E6B6B;
+            color: #79D0F2;
         }
 
         /* training section */
@@ -492,10 +495,11 @@
             text-align: center;
             max-width: 350px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            border: 1px solid rgba(121, 208, 242, 0.3);
         }
         .training-card i {
             font-size: 3rem;
-            color: #FF7F6E;
+            color: #79D0F2;
             margin-bottom: 20px;
         }
 
@@ -516,14 +520,17 @@
         .social-links a {
             display: inline-block;
             margin-right: 20px;
-            color: #1E6B6B;
+            color: #79D0F2;
             font-size: 1.8rem;
             transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: #89C9F9;
         }
         .map {
             flex: 1;
             min-height: 300px;
-            background: #e0e6e9;
+            background: #AEDFFF;
             border-radius: 30px;
             overflow: hidden;
         }
@@ -589,15 +596,15 @@
             left: 0;
             width: 100%;
             height: 30%;
-            background: linear-gradient(to top, rgba(30,107,107,0.15), transparent);
+            background: linear-gradient(to top, rgba(121,208,242,0.15), transparent);
             pointer-events: none;
             z-index: -1;
         }
 
         .arnica-button {
             display: inline-block;
-            background: #FF7F6E;
-            color: white;
+            background: #79D0F2;
+            color: #1A2A3A;
             padding: 14px 36px;
             border-radius: 40px;
             text-decoration: none;
@@ -610,7 +617,7 @@
             margin-right: 15px;
         }
         .arnica-button:hover {
-            background: #e56b5a;
+            background: #89C9F9;
             transform: translateY(-3px);
         }
     </style>
@@ -672,7 +679,7 @@
         </div>
     </section>
 
-    <section id="services" style="background: #FEFCF8;">
+    <section id="services" style="background: #F0F9FF;">
         <div class="container">
             <h2 class="section-title">Наши процедуры</h2>
             <div class="services-grid">
@@ -708,7 +715,7 @@
     </section>
 
     <!-- Секция Мастера (карточки + модалки) -->
-    <section id="masters" style="background: #FDF8F0;">
+    <section id="masters" style="background: #FFFFFF;">
         <div class="container">
             <h2 class="section-title">Наши мастера</h2>
             <div class="masters-grid" id="mastersGrid"></div>
@@ -726,13 +733,11 @@
     </div>
 
     <!-- НОВАЯ СЕКЦИЯ ПОРТФОЛИО (мастера + карусель работ) -->
-    <section id="portfolio" style="background: #FDF8F0;">
+    <section id="portfolio" style="background: #F0F9FF;">
         <div class="container">
             <h2 class="section-title">Наши работы</h2>
             <div class="portfolio-master-container">
-                <!-- Левая колонка: мастера -->
                 <div class="portfolio-masters-list" id="portfolioMastersList"></div>
-                <!-- Правая колонка: карусель работ -->
                 <div class="portfolio-carousel-area" id="portfolioCarouselArea">
                     <div class="carousel-container">
                         <div class="carousel-slides" id="carouselSlides"></div>
@@ -746,7 +751,7 @@
     </section>
 
     <!-- Секция Обучение -->
-    <section id="training" style="background: #FEFCF8;">
+    <section id="training" style="background: #FFFFFF;">
         <div class="container">
             <h2 class="section-title">Обучение в Sirens Bay</h2>
             <div class="training-grid">
@@ -777,7 +782,7 @@
             <h2 class="section-title">Наши контакты</h2>
             <div class="contacts-flex">
                 <div class="contact-info">
-                    <p><i class="fas fa-map-marker-alt" style="color:#1E6B6B;"></i> г. Новосибирск, ул. Ленина, 12</p>
+                    <p><i class="fas fa-map-marker-alt" style="color:#79D0F2;"></i> г. Новосибирск, ул. Ленина, 12</p>
                     <p><i class="fas fa-phone-alt"></i> +7 (995) 272-10-36</p>
                     <p><i class="fab fa-instagram"></i> @sirensbay</p>
                     <p><i class="fab fa-whatsapp"></i> WhatsApp:+7 (995) 272-10-36</p>
@@ -797,8 +802,8 @@
 
 <footer>
     <div class="container">
-        <p>© 2025 Sirens Bay — бухта красоты и спокойствия</p>
-        <p style="margin-top: 10px; font-size: 0.8rem;">Политика конфиденциальности | Дизайн с душой моря</p>
+        <p>© 2026 Sirens Bay — бухта красоты и спокойствия</p>
+        <p style="margin-top: 10px; font-size: 0.8rem;">Политика конфиденциальности | Дизайн с душой</p>
     </div>
 </footer>
 
@@ -810,47 +815,47 @@
     const masters = [
         {
             name: "Елена Губенко",
-            photo: "Мастер1.jpg",
-            birthday: "15 марта 1990",
+            photo: "мастер1.jpg",
+            birthday: "24 мая 2007",
             experience: "8 лет",
-            specialization: "Маникюр, педикюр, дизайн",
+            specialization: "Маникюр, педикюр, ресницы",
             education: "Высшее, Новосибирский технологический институт, дизайн ногтевого сервиса",
             about: "Елена — главный мастер салона, создаёт уникальные дизайны с морской тематикой. Любит экспериментировать с текстурами и стразами.",
             works: [
                 "маникюр1.jpg",
                 "маникюр2.jpg",
-                "маникюр3.jpg",
-                "маникюр4.jpg"
+                "ресницы1.jpg",
+                "маникюр3.jpg"
             ]
         },
         {
             name: "Екатерина Риф",
-            photo: "Мастер1.jpg",
+            photo: "мастер2.jpg",
             birthday: "22 июля 1988",
             experience: "6 лет",
             specialization: "Брови, ресницы, ламинирование",
             education: "Курсы повышения квалификации по brow-арту, международный сертификат",
             about: "Екатерина придаёт взгляду выразительность, идеально подбирает форму бровей и объём ресниц.",
             works: [
-                 "маникюр1.jpg",
-                "маникюр2.jpg",
-                "маникюр3.jpg",
-                "маникюр4.jpg"
+                "педикюр1.jpg",
+                "маникюр4.jpg",
+                "маникюр5.jpg",
+                "маникюр6.jpg"
             ]
         },
         {
             name: "Мария Волна",
-            photo: "Мастер1.jpg",
+            photo: "мастер3.jpg",
             birthday: "9 декабря 1995",
             experience: "4 года",
             specialization: "Маникюр, дизайн, покрытие",
             education: "Школа ногтевого дизайна, победитель городских конкурсов",
             about: "Мария создаёт нежные и стильные дизайны, учитывает все пожелания клиента.",
             works: [
-                 "маникюр1.jpg",
-                "маникюр2.jpg",
-                "маникюр3.jpg",
-                "маникюр4.jpg"
+                "маникюр7.jpg",
+                "маникюр8.jpg",
+                "маникюр9.jpg",
+                "маникюр10.jpg"
             ]
         }
     ];
@@ -863,7 +868,7 @@
             const card = document.createElement('div');
             card.className = 'master-card';
             card.innerHTML = `
-                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://placehold.co/180x180/FDF8F0/1E6B6B?text=Фото'">
+                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://placehold.co/180x180/B3E0F2/1A2A3A?text=Фото'">
                 <h3 class="master-name">${master.name}</h3>
                 <button class="master-details-btn" data-index="${index}">Подробнее</button>
             `;
@@ -886,7 +891,7 @@
 
     function showMasterModal(master) {
         modalPhoto.src = master.photo;
-        modalPhoto.onerror = () => { modalPhoto.src = 'https://placehold.co/150x150/FDF8F0/1E6B6B?text=Фото'; };
+        modalPhoto.onerror = () => { modalPhoto.src = 'https://placehold.co/150x150/B3E0F2/1A2A3A?text=Фото'; };
         modalName.textContent = master.name;
         modalInfo.innerHTML = `
             <p><strong>День рождения:</strong> ${master.birthday}</p>
@@ -921,7 +926,7 @@
             masterDiv.className = 'master-portfolio-item';
             if (idx === currentMasterIndex) masterDiv.classList.add('active');
             masterDiv.innerHTML = `
-                <img src="${master.photo}" alt="${master.name}" class="master-portfolio-photo" onerror="this.src='https://placehold.co/70x70/FDF8F0/1E6B6B?text=Фото'">
+                <img src="${master.photo}" alt="${master.name}" class="master-portfolio-photo" onerror="this.src='https://placehold.co/70x70/B3E0F2/1A2A3A?text=Фото'">
                 <div class="master-portfolio-name">${master.name}</div>
             `;
             masterDiv.addEventListener('click', () => {
@@ -942,7 +947,7 @@
         slidesContainer.innerHTML = '';
         indicatorsContainer.innerHTML = '';
         if (!worksArray.length) {
-            slidesContainer.innerHTML = '<div class="carousel-slide"><img src="https://placehold.co/600x400/FDF8F0/1E6B6B?text=Нет+работ" alt="Нет фото"></div>';
+            slidesContainer.innerHTML = '<div class="carousel-slide"><img src="https://placehold.co/600x400/B3E0F2/1A2A3A?text=Нет+работ" alt="Нет фото"></div>';
             return;
         }
         worksArray.forEach((imgSrc, idx) => {
@@ -970,7 +975,6 @@
         if (!slidesContainer) return;
         const slideWidth = slidesContainer.clientWidth;
         slidesContainer.style.transform = `translateX(-${currentSlideIndex * slideWidth}px)`;
-        // обновить активную точку
         const dots = document.querySelectorAll('.carousel-dot');
         dots.forEach((dot, i) => {
             if (i === currentSlideIndex) dot.classList.add('active');
@@ -1004,14 +1008,11 @@
         startAutoSlide();
     }
 
-    // При загрузке страницы запустить портфолио
     if (document.getElementById('portfolioMastersList')) {
         renderPortfolioMasters();
         renderCarousel(masters[0].works);
-        // Кнопки карусели
         document.getElementById('carouselPrev')?.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
         document.getElementById('carouselNext')?.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
-        // При ресайзе окна пересчитать позицию
         window.addEventListener('resize', () => updateCarouselPosition());
     }
 
@@ -1056,10 +1057,10 @@
         let ctx = canvas.getContext('2d');
         let width, height;
         const waves = [
-            { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(30, 107, 107, 0.35)', yOffset: 0.25, lineWidth: 2 },
-            { amplitude: 40, period: 0.012, speed: 0.025, phase: 1.2, color: 'rgba(44, 140, 140, 0.4)', yOffset: 0.32, lineWidth: 2.5 },
-            { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(26, 90, 90, 0.45)', yOffset: 0.4, lineWidth: 3 },
-            { amplitude: 70, period: 0.025, speed: 0.048, phase: 3.8, color: 'rgba(20, 70, 70, 0.5)', yOffset: 0.5, lineWidth: 3.5 },
+            { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(121, 208, 242, 0.35)', yOffset: 0.25, lineWidth: 2 },
+            { amplitude: 40, period: 0.012, speed: 0.025, phase: 1.2, color: 'rgba(137, 201, 249, 0.4)', yOffset: 0.32, lineWidth: 2.5 },
+            { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(121, 208, 242, 0.45)', yOffset: 0.4, lineWidth: 3 },
+            { amplitude: 70, period: 0.025, speed: 0.048, phase: 3.8, color: 'rgba(179, 224, 242, 0.5)', yOffset: 0.5, lineWidth: 3.5 },
             { amplitude: 18, period: 0.03, speed: 0.06, phase: 5.0, color: 'rgba(255, 255, 240, 0.25)', yOffset: 0.22, lineWidth: 1.5 }
         ];
         let time = 0;
@@ -1118,9 +1119,9 @@
 
         function drawGradientBackground() {
             const grad = ctx.createLinearGradient(0, 0, 0, height);
-            grad.addColorStop(0, '#FDF8F0');
-            grad.addColorStop(0.5, '#E9F0EF');
-            grad.addColorStop(1, '#B2D8D8');
+            grad.addColorStop(0, '#9DE5FE');
+            grad.addColorStop(0.5, '#AEDFFF');
+            grad.addColorStop(1, '#B3E0F2');
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, width, height);
         }
