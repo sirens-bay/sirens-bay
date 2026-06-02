@@ -77,6 +77,12 @@
         .nav-links a:hover, .nav-links a.active {
             color: #79D0F2;
         }
+        /* Добавленные черточки между пунктами меню */
+        .nav-links li:not(:last-child)::after {
+            content: " | ";
+            margin-left: 10px;
+            color: #79D0F2;
+        }
         .menu-toggle {
             display: none;
             font-size: 1.8rem;
