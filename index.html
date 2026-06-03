@@ -23,6 +23,8 @@
             color: #1A2A3A;
             line-height: 1.5;
             scroll-behavior: smooth;
+            position: relative;
+            min-height: 100vh;
         }
 
         h1, h2, h3, .logo, .nav-links a {
@@ -33,6 +35,8 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
         /* Header */
@@ -167,6 +171,8 @@
         /* sections */
         section {
             padding: 80px 0;
+            position: relative;
+            z-index: 2;
         }
         .section-title {
             text-align: center;
@@ -648,7 +654,93 @@
             margin-top: 40px;
         }
 
-        /* responsive */
+        /* ----- ВОДОРОСЛИ (ПО ВСЕЙ ВЫСОТЕ, ПОВЕРХ КОНТЕНТА) ----- */
+        .seaweed-decoration {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 180px;
+            background-repeat: repeat-y;
+            background-position: center top;
+            background-size: contain;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.35;
+        }
+        .seaweed-left {
+            left: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath fill='%231E6B6B' d='M80,800 L80,600 C80,550 50,520 50,480 C50,440 80,420 80,380 C80,340 50,310 50,270 C50,230 80,210 80,170 C80,130 60,100 60,60 L60,0 L100,0 L100,60 C100,100 90,130 90,170 C90,210 110,230 110,270 C110,310 90,340 90,380 C90,420 110,440 110,480 C110,520 90,550 90,600 L90,800 Z'/%3E%3Cpath fill='%232C8C8C' d='M120,800 L120,650 C120,600 100,570 100,530 C100,490 120,470 120,430 C120,390 100,360 100,320 C100,280 120,260 120,220 C120,180 100,150 100,110 L100,0 L140,0 L140,110 C140,150 130,180 130,220 C130,260 150,280 150,320 C150,360 130,390 130,430 C130,470 150,490 150,530 C150,570 130,600 130,650 L130,800 Z'/%3E%3C/svg%3E");
+            background-size: auto 100%;
+        }
+        .seaweed-right {
+            right: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 800'%3E%3Cpath fill='%231E6B6B' d='M120,800 L120,650 C120,600 100,570 100,530 C100,490 120,470 120,430 C120,390 100,360 100,320 C100,280 120,260 120,220 C120,180 100,150 100,110 L100,0 L140,0 L140,110 C140,150 130,180 130,220 C130,260 150,280 150,320 C150,360 130,390 130,430 C130,470 150,490 150,530 C150,570 130,600 130,650 L130,800 Z'/%3E%3Cpath fill='%232C8C8C' d='M80,800 L80,600 C80,550 50,520 50,480 C50,440 80,420 80,380 C80,340 50,310 50,270 C50,230 80,210 80,170 C80,130 60,100 60,60 L60,0 L100,0 L100,60 C100,100 90,130 90,170 C90,210 110,230 110,270 C110,310 90,340 90,380 C90,420 110,440 110,480 C110,520 90,550 90,600 L90,800 Z'/%3E%3C/svg%3E");
+            background-size: auto 100%;
+        }
+        body {
+            position: relative;
+            overflow-x: hidden;
+        }
+        /* На небольших экранах скрываем водоросли, чтобы не мешали */
+        @media (max-width: 1200px) {
+            .seaweed-decoration {
+                display: none;
+            }
+        }
+
+        /* ----- АДАПТАЦИЯ ПОД ПЛАНШЕТЫ (768px - 1024px) ----- */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -40%;
+                width: 15%;
+                height: 560%;
+                background: rgb(118,198,222,0.79);
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                z-index: 1001;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+            .nav-links li:not(:last-child)::after {
+                content: none;
+            }
+            .hero-text .btn, .hero-text .btn-outline {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin: 0 0 15px 0 !important;
+            }
+            .hero-text .btn-outline {
+                margin-left: 0 !important;
+            }
+            .hero-grid {
+                flex-direction: column;
+            }
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            .container {
+                padding: 0 30px;
+            }
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+
+        /* Адаптация под телефоны (до 768px) - уже есть, добавим пару уточнений */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -659,8 +751,8 @@
                 top: 0;
                 right: -30%;
                 width: 30%;
-                height: 370%;
-                background: rgba(118,198,222,0.79);
+                height: 365%;
+                background: rgb(118,198,222,0.79);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -756,6 +848,10 @@
     </style>
 </head>
 <body>
+
+<!-- Декоративные водоросли (абсолютное позиционирование, вся высота) -->
+<div class="seaweed-decoration seaweed-left"></div>
+<div class="seaweed-decoration seaweed-right"></div>
 
 <canvas id="oceanCanvas"></canvas>
 <div class="ocean-overlay"></div>
