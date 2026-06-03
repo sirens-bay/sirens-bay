@@ -1353,42 +1353,44 @@
         startAutoSlide();
     }
 
-    function addTouchEvents() {
-        const container = document.querySelector('.carousel-container');
-        if (!container) return;
-        let startX = 0;
-        let startY = 0;
-        let isHorizontalSwipe = false;
+function addTouchEvents() {
+    const container = document.querySelector('.carousel-container');
+    if (!container) return;
+    let startX = 0;
+    let startY = 0;
+    let isHorizontalSwipe = false;
 
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-            isHorizontalSwipe = false;
-        }, { passive: false });
+    container.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        isHorizontalSwipe = false;
+    }, { passive: false });
 
-        container.addEventListener('touchmove', (e) => {
-            const deltaX = Math.abs(e.touches[0].clientX - startX);
-            const deltaY = Math.abs(e.touches[0].clientY - startY);
-            if (deltaX > deltaY && deltaX > 10) {
+    container.addEventListener('touchmove', (e) => {
+        const deltaX = Math.abs(e.touches[0].clientX - startX);
+        const deltaY = Math.abs(e.touches[0].clientY - startY);
+        if (deltaX > deltaY && deltaX > 10) {
+            if (e.cancelable) {
                 e.preventDefault();
-                isHorizontalSwipe = true;
             }
-        }, { passive: false });
+            isHorizontalSwipe = true;
+        }
+    }, { passive: false });
 
-        container.addEventListener('touchend', (e) => {
-            if (!isHorizontalSwipe) return;
-            const endX = e.changedTouches[0].clientX;
-            const deltaX = endX - startX;
-            if (Math.abs(deltaX) > 50) {
-                if (deltaX > 0) {
-                    prevSlide();
-                } else {
-                    nextSlide();
-                }
-                resetAutoSlide();
+    container.addEventListener('touchend', (e) => {
+        if (!isHorizontalSwipe) return;
+        const endX = e.changedTouches[0].clientX;
+        const deltaX = endX - startX;
+        if (Math.abs(deltaX) > 50) {
+            if (deltaX > 0) {
+                prevSlide();
+            } else {
+                nextSlide();
             }
-        });
-    }
+            resetAutoSlide();
+        }
+    });
+}
 
     if (document.getElementById('portfolioMastersList')) {
         renderPortfolioMasters();
