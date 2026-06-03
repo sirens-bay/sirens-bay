@@ -78,7 +78,6 @@
         .nav-links a:hover, .nav-links a.active {
             color: #79D0F2;
         }
-        /* Добавленные черточки между пунктами меню */
         .nav-links li:not(:last-child)::after {
             content: " | ";
             margin-left: 10px;
@@ -954,7 +953,7 @@
         }
     ];
 
-    // --- Генерация карточек мастеров (секция "Мастера") ---
+    // --- Генерация карточек мастеров с lazy loading ---
     const mastersGrid = document.getElementById('mastersGrid');
     function renderMasters() {
         mastersGrid.innerHTML = '';
@@ -962,7 +961,7 @@
             const card = document.createElement('div');
             card.className = 'master-card';
             card.innerHTML = `
-                <img src="${master.photo}" alt="${master.name}" class="master-photo" onerror="this.src='https://placehold.co/180x180/B3E0F2/1A2A3A?text=Фото'">
+                <img src="${master.photo}" alt="${master.name}" class="master-photo" loading="lazy" onerror="this.src='https://placehold.co/180x180/B3E0F2/1A2A3A?text=Фото'">
                 <h3 class="master-name">${master.name}</h3>
                 <button class="master-details-btn" data-index="${index}">Подробнее</button>
             `;
@@ -1020,7 +1019,7 @@
             masterDiv.className = 'master-portfolio-item';
             if (idx === currentMasterIndex) masterDiv.classList.add('active');
             masterDiv.innerHTML = `
-                <img src="${master.photo}" alt="${master.name}" class="master-portfolio-photo" onerror="this.src='https://placehold.co/70x70/B3E0F2/1A2A3A?text=Фото'">
+                <img src="${master.photo}" alt="${master.name}" class="master-portfolio-photo" loading="lazy" onerror="this.src='https://placehold.co/70x70/B3E0F2/1A2A3A?text=Фото'">
                 <div class="master-portfolio-name">${master.name}</div>
             `;
             masterDiv.addEventListener('click', () => {
@@ -1102,12 +1101,34 @@
         startAutoSlide();
     }
 
+    // Добавляем touch-события для мобильной карусели
+    function addTouchEvents() {
+        const container = document.querySelector('.carousel-container');
+        if (!container) return;
+        let startX = 0;
+        let endX = 0;
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+        container.addEventListener('touchend', (e) => {
+            endX = e.changedTouches[0].clientX;
+            if (startX - endX > 50) {
+                nextSlide();
+                resetAutoSlide();
+            } else if (endX - startX > 50) {
+                prevSlide();
+                resetAutoSlide();
+            }
+        });
+    }
+
     if (document.getElementById('portfolioMastersList')) {
         renderPortfolioMasters();
         renderCarousel(masters[0].works);
         document.getElementById('carouselPrev')?.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
         document.getElementById('carouselNext')?.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
         window.addEventListener('resize', () => updateCarouselPosition());
+        addTouchEvents(); // добавляем свайп для мобильных
     }
 
     // Обработчик для пункта меню "Запись" через Arnica
@@ -1167,39 +1188,57 @@
     });
 </script>
 
-<!-- Волны Canvas -->
+<!-- Волны Canvas (оптимизированные, светлые цвета) -->
 <script>
     (function() {
         const canvas = document.getElementById('oceanCanvas');
         if (!canvas) return;
         let ctx = canvas.getContext('2d');
         let width, height;
-        const waves = [
-            { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(121, 208, 242, 0.35)', yOffset: 0.25, lineWidth: 2 },
-            { amplitude: 40, period: 0.012, speed: 0.025, phase: 1.2, color: 'rgba(137, 201, 249, 0.4)', yOffset: 0.32, lineWidth: 2.5 },
-            { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(121, 208, 242, 0.45)', yOffset: 0.4, lineWidth: 3 },
-            { amplitude: 70, period: 0.025, speed: 0.048, phase: 3.8, color: 'rgba(179, 224, 242, 0.5)', yOffset: 0.5, lineWidth: 3.5 },
-            { amplitude: 18, period: 0.03, speed: 0.06, phase: 5.0, color: 'rgba(255, 255, 240, 0.25)', yOffset: 0.22, lineWidth: 1.5 }
-        ];
+        
+        // Определяем мобильное устройство
+        const isMobile = window.innerWidth <= 768;
+        
+        // Параметры волн (светлые цвета из вашего кода)
+        let waves;
+        if (isMobile) {
+            // На мобильных используем 3 слоя для производительности (цвета из вашего последнего кода)
+            waves = [
+                { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(121, 208, 242, 0.4)', yOffset: 0.25, lineWidth: 2 },
+                { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(121, 208, 242, 0.45)', yOffset: 0.4, lineWidth: 3 },
+                { amplitude: 18, period: 0.03, speed: 0.06, phase: 5.0, color: 'rgba(255, 255, 240, 0.3)', yOffset: 0.22, lineWidth: 1.5 }
+            ];
+        } else {
+            waves = [
+                { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(121, 208, 242, 0.35)', yOffset: 0.25, lineWidth: 2 },
+                { amplitude: 40, period: 0.012, speed: 0.025, phase: 1.2, color: 'rgba(137, 201, 249, 0.4)', yOffset: 0.32, lineWidth: 2.5 },
+                { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(121, 208, 242, 0.45)', yOffset: 0.4, lineWidth: 3 },
+                { amplitude: 70, period: 0.025, speed: 0.048, phase: 3.8, color: 'rgba(179, 224, 242, 0.5)', yOffset: 0.5, lineWidth: 3.5 },
+                { amplitude: 18, period: 0.03, speed: 0.06, phase: 5.0, color: 'rgba(255, 255, 240, 0.25)', yOffset: 0.22, lineWidth: 1.5 }
+            ];
+        }
+        
         let time = 0;
         let animationId;
-
+        
         function resizeCanvas() {
             width = window.innerWidth;
             height = window.innerHeight;
             canvas.width = width;
             canvas.height = height;
         }
-
+        
         function drawWave(ctx, wave, time) {
-            const step = width / 120;
+            const step = isMobile ? width / 60 : width / 120;
             ctx.beginPath();
             let x = 0;
             let yBase = height * wave.yOffset;
             ctx.moveTo(x, yBase + Math.sin(x * wave.period + time * wave.speed + wave.phase) * wave.amplitude);
             for (let x = 0; x <= width; x += step) {
                 let y = yBase + Math.sin(x * wave.period + time * wave.speed + wave.phase) * wave.amplitude;
-                y += Math.sin(x * 0.003 + time * 0.8) * (wave.amplitude * 0.15);
+                if (!isMobile) {
+                    y += Math.sin(x * 0.003 + time * 0.8) * (wave.amplitude * 0.15);
+                }
                 ctx.lineTo(x, y);
             }
             ctx.lineTo(width, height);
@@ -1219,8 +1258,9 @@
                 ctx.stroke();
             }
         }
-
+        
         function drawFoam() {
+            if (isMobile) return;
             ctx.globalCompositeOperation = 'lighter';
             for (let i = 0; i < 60; i++) {
                 let x = (Math.sin(time * 0.2 + i) * 0.5 + 0.5) * width;
@@ -1234,7 +1274,7 @@
             }
             ctx.globalCompositeOperation = 'source-over';
         }
-
+        
         function drawGradientBackground() {
             const grad = ctx.createLinearGradient(0, 0, 0, height);
             grad.addColorStop(0, '#9DE5FE');
@@ -1243,28 +1283,34 @@
             ctx.fillStyle = grad;
             ctx.fillRect(0, 0, width, height);
         }
-
+        
         function animate() {
             if (!ctx) return;
             drawGradientBackground();
             for (let w of waves) drawWave(ctx, w, time);
             drawFoam();
-            ctx.globalCompositeOperation = 'overlay';
-            for (let i = 0; i < 12; i++) {
-                let x = width * (0.2 + Math.sin(time * 0.1 + i) * 0.15);
-                let y = height * (0.3 + Math.cos(time * 0.07 + i) * 0.05);
-                let radGrad = ctx.createRadialGradient(x, y, 5, x+15, y+10, 60);
-                radGrad.addColorStop(0, 'rgba(255,255,200,0.2)');
-                radGrad.addColorStop(1, 'rgba(255,255,200,0)');
-                ctx.fillStyle = radGrad;
-                ctx.fillRect(0, 0, width, height);
+            if (!isMobile) {
+                ctx.globalCompositeOperation = 'overlay';
+                for (let i = 0; i < 12; i++) {
+                    let x = width * (0.2 + Math.sin(time * 0.1 + i) * 0.15);
+                    let y = height * (0.3 + Math.cos(time * 0.07 + i) * 0.05);
+                    let radGrad = ctx.createRadialGradient(x, y, 5, x+15, y+10, 60);
+                    radGrad.addColorStop(0, 'rgba(255,255,200,0.2)');
+                    radGrad.addColorStop(1, 'rgba(255,255,200,0)');
+                    ctx.fillStyle = radGrad;
+                    ctx.fillRect(0, 0, width, height);
+                }
+                ctx.globalCompositeOperation = 'source-over';
             }
-            ctx.globalCompositeOperation = 'source-over';
             time += 0.025;
             animationId = requestAnimationFrame(animate);
         }
-
-        window.addEventListener('resize', () => resizeCanvas());
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            const newIsMobile = window.innerWidth <= 768;
+            if (newIsMobile !== isMobile) location.reload();
+        });
         resizeCanvas();
         animate();
         window.addEventListener('beforeunload', () => { if (animationId) cancelAnimationFrame(animationId); });
