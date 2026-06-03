@@ -604,6 +604,73 @@
             background: #79D0F2;
         }
 
+        /* FAQ section */
+        .faq-section {
+            background: #F0F9FF;
+            padding: 80px 0;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            background: white;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid rgba(121, 208, 242, 0.3);
+            transition: 0.3s;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1A2A3A;
+            background: white;
+            transition: 0.2s;
+        }
+        .faq-question:hover {
+            background: #FDF8F0;
+        }
+        .faq-question i {
+            color: #79D0F2;
+            transition: transform 0.3s;
+        }
+        .faq-answer {
+            max-height: 0;
+            padding: 0 25px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s;
+            border-top: none;
+            color: #2c3e4e;
+            line-height: 1.6;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 25px 20px 25px;
+        }
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        @media (max-width: 768px) {
+            .faq-question {
+                padding: 15px 20px;
+                font-size: 1rem;
+            }
+            .faq-answer {
+                padding: 0 20px;
+                font-size: 0.9rem;
+            }
+            .faq-item.active .faq-answer {
+                padding: 0 20px 15px 20px;
+            }
+        }
+
         /* contacts */
         .contacts-flex {
             display: flex;
@@ -699,8 +766,8 @@
                 top: 0;
                 right: -40%;
                 width: 15%;
-                height: 560%;
-                background: rgb(118,198,222,0.79);
+                height: 610%;
+                background: rgba(118,198,222,0.9);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -751,8 +818,8 @@
                 top: 0;
                 right: -30%;
                 width: 30%;
-                height: 365%;
-                background: rgb(118,198,222,0.79);
+                height: 400%;
+                background: rgba(118,198,222,0.9);
                 flex-direction: column;
                 align-items: center;
                 justify-content: flex-start;
@@ -872,6 +939,7 @@
             <li><a href="#" id="arnica-menu-link">Запись</a></li>
             <li><a href="#training">Обучение</a></li>
             <li><a href="#reviews">Отзывы</a></li>
+            <li><a href="#faq">ЧаВо</a></li>
             <li><a href="#contacts">Контакты</a></li>
         </ul>
     </div>
@@ -1013,6 +1081,60 @@
             <h2 class="section-title">Отзывы наших клиентов</h2>
             <script src="https://res.smartwidgets.ru/app.js" async></script>
             <div class="sw-app" data-app="5458298af749f2173df5e08713a30d2a"></div>
+        </div>
+    </section>
+
+    <!-- Секция FAQ (Часто задаваемые вопросы) -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Часто задаваемые вопросы</h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Как записаться в Sirens Bay?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Вы можете записаться онлайн через кнопку «Записаться» в меню или на главном экране, а также по телефону +7 (995) 272-10-36 или в Telegram (@Helena_Ale). Мы подберём удобное для вас время.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Какие материалы вы используете?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Мы работаем только с профессиональными, сертифицированными материалами премиум-брендов (CND, Jessica, Lumenis и др.). Все материалы гипоаллергенны и безопасны.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Нужна ли предоплата?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Предоплата не требуется. Однако при переносе записи менее чем за 3 часа или неявке мы оставляем за собой право взимать 50% стоимости процедуры.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Как подготовиться к процедуре?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Перед маникюром/педикюром достаточно удалить старое покрытие (если есть). Для ламинирования ресниц/бровей – приходите без макияжа. Мы дадим полные рекомендации при записи.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Что делать, если нужно перенести запись?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Предупредите нас не менее чем за 3 часа по телефону или в Telegram. Мы бесплатно перенесём процедуру на другое удобное время.
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1309,6 +1431,14 @@
         if (e.target === trainingModal) {
             trainingModal.style.display = 'none';
         }
+    });
+
+    // Аккордеон для FAQ
+    document.querySelectorAll('.faq-question').forEach(question => {
+        question.addEventListener('click', () => {
+            const parent = question.closest('.faq-item');
+            parent.classList.toggle('active');
+        });
     });
 
     // Мобильное меню
