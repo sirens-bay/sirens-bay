@@ -306,6 +306,7 @@
             border-radius: 30px;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            touch-action: pan-y pinch-zoom;
         }
         .carousel-slides {
             display: flex;
@@ -654,14 +655,27 @@
             }
             .nav-links {
                 display: none;
-                width: 100%;
+                position: fixed;
+                top: 0;
+                right: -30%;
+                width: 30%;
+                height: 370%;
+                background: rgba(118,198,222,0.79);
                 flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-                padding: 20px 0;
+                align-items: center;
+                justify-content: flex-start;
+                gap: 1.5rem;
+                padding: 80px 20px 20px;
+                transition: right 0.3s ease;
+                z-index: 1001;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
             }
             .nav-links.active {
                 display: flex;
+                right: 0;
+            }
+            .nav-links li:not(:last-child)::after {
+                content: none;
             }
             .hero-text h1 {
                 font-size: 2.4rem;
@@ -675,6 +689,26 @@
             .master-photo {
                 width: 140px;
                 height: 140px;
+            }
+            .logo img {
+                margin-left: 10px;
+            }
+            .hero-text .btn, .hero-text .btn-outline {
+                display: block;
+                width: 100%;
+                text-align: center;
+                margin: 0 0 15px 0 !important;
+            }
+            .hero-text .btn-outline {
+                margin-left: 0 !important;
+            }
+            .contact-info p {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: baseline;
+            }
+            .contact-info p i {
+                width: 30px;
             }
         }
 
@@ -893,7 +927,7 @@
                 <div class="contact-info">
                     <p><i class="fas fa-map-marker-alt"></i> г. Новосибирск, ул. Ленина, 12</p>
                     <p><i class="fas fa-phone-alt"></i> +7 (995) 272-10-36</p>
-                    <p><i class="fab fa-whatsapp"></i> WhatsApp:+7 (995) 272-10-36</p>
+                    <p><i class="fab fa-whatsapp"></i> WhatsApp: +7 (995) 272-10-36</p>
                     <div class="social-links">
                         <a href="https://www.instagram.com/elena165859?igsh=MWl4ajNnZDdzajFoYQ=="><i class="fab fa-instagram"></i></a>
                         <a href="https://t.me/@Helena_Ale"><i class="fab fa-telegram"></i></a>
@@ -930,7 +964,7 @@
 <script type="text/javascript" src="https://app.arnica.pro/booking/script/button/orgid/80812"></script>
 
 <script>
-    // Данные мастеров (только Елена Губенко, как в вашем исходном коде)
+    // Данные мастеров (только Елена Губенко)
     const masters = [
         {
             name: "Елена Губенко",
@@ -1101,22 +1135,38 @@
         startAutoSlide();
     }
 
-    // Добавляем touch-события для мобильной карусели
     function addTouchEvents() {
         const container = document.querySelector('.carousel-container');
         if (!container) return;
         let startX = 0;
-        let endX = 0;
+        let startY = 0;
+        let isHorizontalSwipe = false;
+
         container.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
-        });
+            startY = e.touches[0].clientY;
+            isHorizontalSwipe = false;
+        }, { passive: false });
+
+        container.addEventListener('touchmove', (e) => {
+            const deltaX = Math.abs(e.touches[0].clientX - startX);
+            const deltaY = Math.abs(e.touches[0].clientY - startY);
+            if (deltaX > deltaY && deltaX > 10) {
+                e.preventDefault();
+                isHorizontalSwipe = true;
+            }
+        }, { passive: false });
+
         container.addEventListener('touchend', (e) => {
-            endX = e.changedTouches[0].clientX;
-            if (startX - endX > 50) {
-                nextSlide();
-                resetAutoSlide();
-            } else if (endX - startX > 50) {
-                prevSlide();
+            if (!isHorizontalSwipe) return;
+            const endX = e.changedTouches[0].clientX;
+            const deltaX = endX - startX;
+            if (Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    prevSlide();
+                } else {
+                    nextSlide();
+                }
                 resetAutoSlide();
             }
         });
@@ -1128,7 +1178,7 @@
         document.getElementById('carouselPrev')?.addEventListener('click', () => { prevSlide(); resetAutoSlide(); });
         document.getElementById('carouselNext')?.addEventListener('click', () => { nextSlide(); resetAutoSlide(); });
         window.addEventListener('resize', () => updateCarouselPosition());
-        addTouchEvents(); // добавляем свайп для мобильных
+        addTouchEvents();
     }
 
     // Обработчик для пункта меню "Запись" через Arnica
@@ -1196,13 +1246,10 @@
         let ctx = canvas.getContext('2d');
         let width, height;
         
-        // Определяем мобильное устройство
         const isMobile = window.innerWidth <= 768;
         
-        // Параметры волн (светлые цвета из вашего кода)
         let waves;
         if (isMobile) {
-            // На мобильных используем 3 слоя для производительности (цвета из вашего последнего кода)
             waves = [
                 { amplitude: 25, period: 0.008, speed: 0.015, phase: 0, color: 'rgba(121, 208, 242, 0.4)', yOffset: 0.25, lineWidth: 2 },
                 { amplitude: 55, period: 0.018, speed: 0.035, phase: 2.5, color: 'rgba(121, 208, 242, 0.45)', yOffset: 0.4, lineWidth: 3 },
