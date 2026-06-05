@@ -671,7 +671,7 @@
             }
         }
 
-        /* contacts */
+        /* contacts (обновлённый блок) */
         .contacts-flex {
             display: flex;
             flex-wrap: wrap;
@@ -721,7 +721,7 @@
             margin-top: 40px;
         }
 
-        /* ----- ПЛАВАЮЩИЕ КНОПКИ (WhatsApp, Telegram, Наверх) ----- */
+        /* ----- ПЛАВАЮЩИЕ КНОПКИ (WhatsApp, Telegram, VK, Наверх) ----- */
         .floating-buttons {
             position: fixed;
             bottom: 20px;
@@ -749,7 +749,6 @@
         }
         .floating-btn:hover {
             transform: scale(1.05);
-            background: #89C9F9;
         }
         .btn-wa {
             background: #25D366;
@@ -762,6 +761,12 @@
         }
         .btn-tg:hover {
             background: #0077b3;
+        }
+        .btn-vk {
+            background: #4680C2;
+        }
+        .btn-vk:hover {
+            background: #3a6da8;
         }
         .btn-up {
             background: #79D0F2;
@@ -1203,6 +1208,7 @@
         </div>
     </section>
 
+    <!-- НОВАЯ СЕКЦИЯ КОНТАКТОВ (взята из предложенного кода) -->
     <section id="contacts">
         <div class="container">
             <h2 class="section-title">Наши контакты</h2>
@@ -1232,7 +1238,7 @@
     </div>
 </footer>
 
-<!-- Плавающие кнопки -->
+<!-- Плавающие кнопки (с добавленной VK) -->
 <div class="floating-buttons">
     <a href="https://wa.me/79952721036?text=Здравствуйте! Хочу записаться к вам." target="_blank" class="floating-btn btn-wa" aria-label="WhatsApp">
         <i class="fab fa-whatsapp"></i>
@@ -1240,7 +1246,7 @@
     <a href="https://t.me/Helena_Ale" target="_blank" class="floating-btn btn-tg" aria-label="Telegram">
         <i class="fab fa-telegram-plane"></i>
     </a>
-        <a href="https://vk.com/sirensnsk" target="_blank" class="floating-btn btn-vk" aria-label="ВКонтакте">
+    <a href="https://vk.com/sirensnsk" target="_blank" class="floating-btn btn-vk" aria-label="ВКонтакте">
         <i class="fab fa-vk"></i>
     </a>
     <button id="scrollToTopBtn" class="floating-btn btn-up" aria-label="Наверх">
