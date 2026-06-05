@@ -671,119 +671,6 @@
             }
         }
 
-        /* Модальное окно для прайс-листа (обновлённые стили) */
-        .price-modal {
-            display: none;
-            position: fixed;
-            z-index: 2002;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0,0,0,0.8);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-        }
-        .price-modal-content {
-            background: white;
-            max-width: 900px;
-            width: 90%;
-            max-height: 85vh;
-            border-radius: 40px;
-            padding: 20px;
-            position: relative;
-            overflow-y: auto;
-            animation: modalFadeIn 0.3s ease;
-        }
-        .price-modal-close {
-            position: absolute;
-            top: 15px;
-            right: 25px;
-            font-size: 28px;
-            cursor: pointer;
-            color: #79D0F2;
-            transition: 0.2s;
-        }
-        .price-modal-close:hover {
-            color: #1A2A3A;
-        }
-        .price-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-        .price-tab {
-            background: #F0F9FF;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            color: #1A2A3A;
-        }
-        .price-tab.active {
-            background: #79D0F2;
-            color: white;
-        }
-
-        /* Новая сетка для галереи */
-        .price-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 20px;
-            justify-items: center;
-            align-items: center;
-            padding: 10px;
-        }
-        .price-img {
-            width: 100%;
-            max-width: 200px;
-            cursor: pointer;
-            border-radius: 20px;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            object-fit: cover;
-        }
-        .price-img:hover {
-            transform: scale(1.02);
-        }
-        /* Увеличенная картинка (занимает весь экран) */
-        .price-img.expanded {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(1);
-            width: auto;
-            max-width: 90vw;
-            max-height: 90vh;
-            z-index: 11000;
-            background: transparent;
-            box-shadow: 0 0 0 1000px rgba(0,0,0,0.8);
-            border-radius: 20px;
-            cursor: pointer;
-        }
-        /* Затемнение фона для увеличенной картинки создаётся за счёт box-shadow, но чтобы перекрыть весь экран используем дополнительный фон */
-        body.price-expanded-active {
-            overflow: hidden;
-        }
-        @media (max-width: 768px) {
-            .price-gallery {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-                gap: 15px;
-            }
-            .price-img {
-                max-width: 140px;
-            }
-            .price-tab {
-                padding: 8px 18px;
-                font-size: 0.9rem;
-            }
-        }
-
         /* contacts */
         .contacts-flex {
             display: flex;
@@ -1068,7 +955,6 @@
                 🧜‍♀️ Мы подбираем и собираем образ под тебя так, чтобы ты чувствовала себя уверенно и ловила комплименты каждый день 🧜‍♀️</p>
                 <button class="btn arnica-button" onclick="onlineBooking.open();return false;">Запишитесь прямо сейчас!</button>
                 <a href="#services" class="btn btn-outline" style="margin-left: 15px;">Услуги</a>
-                <button class="btn btn-outline" id="priceListBtn" style="margin-top: 15px;">Прайс-лист</button>
             </div>
             <div class="hero-image">
                 <img src="https://sun9-1.userapi.com/s/v1/ig2/lQEQ2YdHpZ9j1ZfJ-5LuXjOW8IxVmantQQzhs378QucJDmrA8ozrYE9h0nkRiOnl2SdQ5U7LESTV9D2mq8F0x2DX.jpg?quality=95&as=32x32,48x48,72x72,108x108,160x160,240x240,360x360,480x480,540x540,640x640&from=bu&u=LX9Csl_770J41MWbLRjjaYWNaTmzjlBnmGvDSJJKgvc&cs=640x0" alt="Атмосфера Sirens Bay">
@@ -1289,19 +1175,6 @@
         <a href="https://t.me/@Helena_Ale" target="_blank" class="tg-button">
             <i class="fab fa-telegram"></i> Написать в Telegram
         </a>
-    </div>
-</div>
-
-<!-- Модальное окно прайс-листа -->
-<div id="priceModal" class="price-modal">
-    <div class="price-modal-content">
-        <span class="price-modal-close">&times;</span>
-        <div class="price-tabs">
-            <button class="price-tab active" data-tab="nails">Ноготочки</button>
-            <button class="price-tab" data-tab="brows">Ресницы/Брови</button>
-        </div>
-        <div id="priceGalleryNails" class="price-gallery"></div>
-        <div id="priceGalleryBrows" class="price-gallery" style="display: none;"></div>
     </div>
 </div>
 
@@ -1565,111 +1438,6 @@
         question.addEventListener('click', () => {
             const parent = question.closest('.faq-item');
             parent.classList.toggle('active');
-        });
-    });
-
-    // ===================== ПРАЙС-ЛИСТ =====================
-    const priceModal = document.getElementById('priceModal');
-    const priceBtn = document.getElementById('priceListBtn');
-    const priceClose = document.querySelector('.price-modal-close');
-    const priceTabs = document.querySelectorAll('.price-tab');
-    const galleryNails = document.getElementById('priceGalleryNails');
-    const galleryBrows = document.getElementById('priceGalleryBrows');
-
-    // Замените пути на свои картинки
-    const nailsImages = [
-        "прайс-маникюр1.jpg",
-        "прайс-маникюр2.jpg",
-        "прайс-маникюр3.jpg"
-    ];
-    const browsImages = [
-        "прайс-брови1.jpg",
-    ];
-
-    // Функция для обработки увеличения картинки (с блокировкой скролла)
-    function setupImageExpansion() {
-        const allImages = document.querySelectorAll('.price-img');
-        allImages.forEach(img => {
-            img.removeEventListener('click', img._clickHandler);
-            img._clickHandler = function(e) {
-                e.stopPropagation();
-                // Если картинка уже увеличена — сворачиваем
-                if (this.classList.contains('expanded')) {
-                    this.classList.remove('expanded');
-                    document.body.style.overflow = '';
-                } else {
-                    // Убираем класс expanded у всех остальных
-                    document.querySelectorAll('.price-img.expanded').forEach(i => {
-                        i.classList.remove('expanded');
-                    });
-                    this.classList.add('expanded');
-                    document.body.style.overflow = 'hidden';
-                }
-            };
-            img.addEventListener('click', img._clickHandler);
-        });
-    }
-
-    function renderGallery(container, images) {
-        container.innerHTML = '';
-        images.forEach(src => {
-            const img = document.createElement('img');
-            img.src = src;
-            img.classList.add('price-img');
-            img.alt = 'Прайс-лист';
-            container.appendChild(img);
-        });
-        setupImageExpansion();
-    }
-
-    renderGallery(galleryNails, nailsImages);
-    renderGallery(galleryBrows, browsImages);
-
-    // Закрытие увеличенной картинки при клике вне её (на фоне модального окна)
-    document.addEventListener('click', function(e) {
-        const expandedImg = document.querySelector('.price-img.expanded');
-        if (expandedImg && !expandedImg.contains(e.target) && !e.target.classList.contains('price-img')) {
-            expandedImg.classList.remove('expanded');
-            document.body.style.overflow = '';
-        }
-    });
-
-    if (priceBtn) {
-        priceBtn.addEventListener('click', () => {
-            priceModal.style.display = 'flex';
-            // Сброс увеличенных картинок при открытии
-            document.querySelectorAll('.price-img.expanded').forEach(i => i.classList.remove('expanded'));
-            document.body.style.overflow = '';
-        });
-    }
-    if (priceClose) {
-        priceClose.addEventListener('click', () => {
-            priceModal.style.display = 'none';
-            document.body.style.overflow = '';
-        });
-    }
-    window.addEventListener('click', (e) => {
-        if (e.target === priceModal) {
-            priceModal.style.display = 'none';
-            document.body.style.overflow = '';
-        }
-    });
-
-    priceTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            priceTabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            const tabName = tab.getAttribute('data-tab');
-            if (tabName === 'nails') {
-                galleryNails.style.display = 'grid';
-                galleryBrows.style.display = 'none';
-            } else {
-                galleryNails.style.display = 'none';
-                galleryBrows.style.display = 'grid';
-            }
-            // При смене вкладки сбрасываем увеличенные картинки
-            document.querySelectorAll('.price-img.expanded').forEach(i => i.classList.remove('expanded'));
-            document.body.style.overflow = '';
         });
     });
 
