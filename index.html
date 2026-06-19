@@ -89,18 +89,32 @@ section{padding:90px 0;position:relative}
   white-space:nowrap;
   border:2px solid transparent;
 }
+
+/* Главная кнопка — светло-голубой градиент (для "Записаться") */
 .btn-primary{
-  background:var(--coral);
-  color:#fff;
-  box-shadow:0 8px 20px rgba(255,127,110,.35);
-}
-.btn-primary:hover{background:var(--coral-dark);transform:translateY(-2px);box-shadow:0 12px 26px rgba(255,127,110,.45)}
-.btn-secondary{
-  background:var(--accent);
+  background:linear-gradient(135deg,var(--accent) 0%,var(--accent-5) 100%);
   color:var(--dark);
-  box-shadow:0 8px 20px rgba(121,208,242,.35);
+  box-shadow:0 8px 20px rgba(121,208,242,.4);
+  font-weight:700;
 }
-.btn-secondary:hover{background:var(--accent-2);transform:translateY(-2px)}
+.btn-primary:hover{
+  background:linear-gradient(135deg,var(--accent-2) 0%,var(--accent) 100%);
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(121,208,242,.55);
+}
+
+/* Вторичная кнопка — более тёмный голубой (для "Услуги") */
+.btn-secondary{
+  background:linear-gradient(135deg,#5BA8D6 0%,#4A9CC9 100%);
+  color:#fff;
+  box-shadow:0 8px 20px rgba(91,168,214,.4);
+}
+.btn-secondary:hover{
+  background:linear-gradient(135deg,#4A9CC9 0%,#3D8AB5 100%);
+  transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(74,156,201,.55);
+}
+
 .btn-outline{
   background:transparent;
   color:var(--dark);
@@ -859,6 +873,122 @@ section{padding:90px 0;position:relative}
 .modal .tg-link:hover{background:#1b86ba;transform:translateY(-2px)}
 
 /* =========================================================
+   МОДАЛКА ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ
+   ========================================================= */
+.modal.privacy-modal{
+  max-width:760px;
+  max-height:90vh;
+}
+.privacy-modal h2{
+  font-size:1.8rem;
+  margin-bottom:8px;
+  padding-right:40px;
+}
+.privacy-modal .privacy-date{
+  color:var(--accent);
+  font-size:.88rem;
+  margin-bottom:24px;
+  font-weight:500;
+}
+.privacy-modal h4{
+  font-size:1.1rem;
+  margin:22px 0 10px;
+  color:var(--dark);
+}
+.privacy-modal p{
+  color:var(--dark-soft);
+  font-size:.95rem;
+  line-height:1.7;
+  margin-bottom:12px;
+}
+.privacy-modal ul{
+  margin:8px 0 14px 22px;
+  color:var(--dark-soft);
+  font-size:.95rem;
+}
+.privacy-modal li{
+  margin-bottom:6px;
+  line-height:1.6;
+}
+.privacy-modal strong{color:var(--dark)}
+
+/* =========================================================
+   COOKIE-ПЛАШКА
+   ========================================================= */
+.cookie-banner{
+  position:fixed;
+  left:20px;
+  right:20px;
+  bottom:20px;
+  max-width:720px;
+  margin:0 auto;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border:1px solid rgba(121,208,242,.3);
+  border-radius:20px;
+  padding:22px 26px;
+  box-shadow:0 15px 40px rgba(26,42,58,.18);
+  z-index:150;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  transform:translateY(calc(100% + 40px));
+  opacity:0;
+  visibility:hidden;
+  transition:transform .5s cubic-bezier(.4,.0,.2,1), opacity .4s ease, visibility .4s;
+}
+.cookie-banner.show{
+  transform:translateY(0);
+  opacity:1;
+  visibility:visible;
+}
+.cookie-banner-icon{
+  width:52px;
+  height:52px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,var(--accent-3),var(--accent-5));
+  border-radius:14px;
+  font-size:1.6rem;
+}
+.cookie-banner-content{
+  flex:1;
+  font-size:.92rem;
+  color:var(--dark-soft);
+  line-height:1.55;
+}
+.cookie-banner-content a{
+  color:var(--accent);
+  font-weight:600;
+  text-decoration:underline;
+  text-decoration-color:rgba(121,208,242,.4);
+  text-underline-offset:2px;
+}
+.cookie-banner-content a:hover{
+  color:var(--coral);
+  text-decoration-color:var(--coral);
+}
+.cookie-banner-btn{
+  flex-shrink:0;
+  padding:11px 22px;
+  background:var(--coral);
+  color:#fff;
+  border-radius:50px;
+  font-weight:600;
+  font-size:.9rem;
+  transition:var(--transition);
+  box-shadow:0 6px 16px rgba(255,127,110,.35);
+}
+.cookie-banner-btn:hover{
+  background:var(--coral-dark);
+  transform:translateY(-2px);
+  box-shadow:0 10px 22px rgba(255,127,110,.45);
+}
+
+/* =========================================================
    ДЕКОРАТИВНЫЕ ВОДОРОСЛИ
    ========================================================= */
 .seaweed{
@@ -939,6 +1069,19 @@ section{padding:90px 0;position:relative}
   .modal{padding:26px 22px}
   .floating{right:14px;bottom:14px;gap:10px}
   .float-btn{width:50px;height:50px;font-size:1.25rem}
+
+  /* Cookie-плашка на мобильных */
+  .cookie-banner{
+    flex-direction:column;
+    text-align:center;
+    padding:20px;
+    gap:14px;
+    left:12px;
+    right:12px;
+    bottom:12px;
+  }
+  .cookie-banner-icon{width:46px;height:46px;font-size:1.4rem}
+  .cookie-banner-btn{width:100%}
 }
 @media (max-width:480px){
   .container{padding:0 16px}
@@ -1028,7 +1171,7 @@ section{padding:90px 0;position:relative}
   <canvas id="waveCanvas"></canvas>
   <div class="container hero-inner">
     <div class="hero-text">
-      <h1><span class="emoji">🧜‍♀️</span> Sirens Bay <br><span class="accent">искусство быть собой</span></h1>
+      <h1> Sirens Bay <br><span class="accent">искусство быть собой</span></h1>
       <p>Студия красоты в Новосибирске с морской атмосферой. Маникюр, педикюр, брови и ресницы — в стерильных условиях, с любовью к деталям и дизайнерским подходом к каждому образу.</p>
       <div class="hero-buttons">
         <button class="btn btn-primary" onclick="openBooking()">
@@ -1282,7 +1425,7 @@ section{padding:90px 0;position:relative}
 <footer class="footer">
   <div class="container">
     © <span id="year"></span> Sirens Bay — студия красоты в Новосибирске. Все права защищены.
-    <a href="#" onclick="event.preventDefault();alert('Страница политики конфиденциальности в разработке.');">Политика конфиденциальности</a>
+    <a href="#" onclick="event.preventDefault();openPrivacyModal();">Политика конфиденциальности</a>
   </div>
 </footer>
 
@@ -1323,6 +1466,82 @@ section{padding:90px 0;position:relative}
       <i class="fa-brands fa-telegram"></i> @Helena_Ale
     </a>
   </div>
+</div>
+
+<!-- =========================================================
+     МОДАЛКА ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ
+     ========================================================= -->
+<div class="modal-overlay" id="privacyModal">
+  <div class="modal privacy-modal">
+    <button class="modal-close" onclick="closeModal('privacyModal')" aria-label="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+    <h2>Политика конфиденциальности</h2>
+    <div class="privacy-date">Дата вступления в силу: 19 июня 2026 г.</div>
+
+    <p>Настоящая Политика конфиденциальности регулирует обработку персональных данных пользователей сайта студии красоты <strong>«Sirens Bay»</strong> (далее — «Оператор»).</p>
+
+    <h4>1. Общие положения</h4>
+    <p>Политика разработана в соответствии с Федеральным законом №152-ФЗ «О персональных данных». Используя Сайт, пользователь соглашается с условиями настоящей Политики.</p>
+
+    <h4>2. Какие данные мы собираем</h4>
+    <ul>
+      <li><strong>Персональные данные:</strong> имя, номер телефона, e-mail — при оставлении заявки через форму на сайте или виджет онлайн-записи Arnica.</li>
+      <li><strong>Технические данные:</strong> IP-адрес, информация о браузере, устройстве, cookies, время посещения.</li>
+      <li><strong>Иные данные:</strong> сообщения, отправленные через мессенджеры (WhatsApp, Telegram, ВКонтакте) по ссылкам с Сайта.</li>
+    </ul>
+
+    <h4>3. Цели обработки данных</h4>
+    <ul>
+      <li>обработка заявок и запись на процедуры студии;</li>
+      <li>связь с пользователем по вопросам записи и консультаций;</li>
+      <li>улучшение качества работы Сайта;</li>
+      <li>исполнение требований законодательства РФ.</li>
+    </ul>
+
+    <h4>4. Правовые основания обработки</h4>
+    <p>Обработка осуществляется на основании согласия пользователя (ст. 6 ФЗ-152), необходимости исполнения договора (записи на услугу) и требований законодательства РФ.</p>
+
+    <h4>5. Порядок обработки и передачи данных</h4>
+    <p>Оператор обеспечивает конфиденциальность данных и не передаёт их третьим лицам, за исключением случаев, предусмотренных законодательством. Данные могут быть переданы сервисам-партнёрам: <strong>Arnica</strong> (онлайн-запись), хостинг-провайдеру, <strong>SmartWidgets</strong> (виджет отзывов).</p>
+
+    <h4>6. Сроки хранения и удаление данных</h4>
+    <p>Данные хранятся не дольше, чем этого требуют цели их обработки. Пользователь вправе в любой момент отозвать согласие, направив запрос Оператору. После этого данные будут удалены в течение 30 дней.</p>
+
+    <h4>7. Права пользователя</h4>
+    <ul>
+      <li>получать информацию об обработке своих данных;</li>
+      <li>требовать уточнения, блокирования или удаления данных;</li>
+      <li>отозвать согласие на обработку персональных данных;</li>
+      <li>обратиться с жалобой в Роскомнадзор.</li>
+    </ul>
+
+    <h4>8. Использование cookies</h4>
+    <p>Сайт использует cookies для обеспечения корректной работы и улучшения пользовательского опыта. Пользователь может отключить cookies в настройках браузера, однако это может повлиять на функциональность Сайта.</p>
+
+    <h4>9. Безопасность</h4>
+    <p>Оператор принимает необходимые организационные и технические меры для защиты персональных данных от неправомерного или случайного доступа, уничтожения, изменения, блокирования, копирования и распространения.</p>
+
+    <h4>10. Контактная информация</h4>
+    <p>По всем вопросам, связанным с обработкой персональных данных, вы можете обратиться к Оператору:</p>
+    <ul>
+      <li><strong>Студия:</strong> «Sirens Bay», г. Новосибирск</li>
+      <li><strong>Телефон:</strong> +7 (995) 272-10-36</li>
+      <li><strong>Telegram:</strong> <a href="https://t.me/Helena_Ale" target="_blank" rel="noopener">@Helena_Ale</a></li>
+    </ul>
+
+    <h4>11. Изменение Политики</h4>
+    <p>Оператор оставляет за собой право вносить изменения в настоящую Политику. Новая редакция вступает в силу с момента её размещения на Сайте.</p>
+  </div>
+</div>
+
+<!-- =========================================================
+     COOKIE-ПЛАШКА
+     ========================================================= -->
+<div class="cookie-banner" id="cookieBanner" role="dialog" aria-label="Уведомление о cookies">
+  <div class="cookie-banner-icon" aria-hidden="true">🍪</div>
+  <div class="cookie-banner-content">
+    Мы используем cookies для улучшения работы сайта и анализа посещений. Продолжая пользоваться сайтом, вы соглашаетесь с <a href="#" onclick="event.preventDefault();openPrivacyModal();">политикой конфиденциальности</a> и обработкой персональных данных.
+  </div>
+  <button class="cookie-banner-btn" id="cookieAcceptBtn">Принять</button>
 </div>
 
 <!-- =========================================================
@@ -1465,6 +1684,13 @@ function openMasterModal(id){
     <div class="modal-row" style="align-items:flex-start"><i class="fa-solid fa-user"></i><div><strong>О себе:</strong><br>${m.about}</div></div>
   `;
   openModal('masterModal');
+}
+
+/* =========================================================
+   МОДАЛКА ПОЛИТИКИ КОНФИДЕНЦИАЛЬНОСТИ
+   ========================================================= */
+function openPrivacyModal(){
+  openModal('privacyModal');
 }
 
 /* =========================================================
@@ -1662,6 +1888,38 @@ window.addEventListener('scroll', () => {
 scrollTopBtn.addEventListener('click', () => {
   window.scrollTo({top:0, behavior:'smooth'});
 });
+
+/* =========================================================
+   COOKIE-ПЛАШКА
+   ========================================================= */
+(function(){
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('cookieAcceptBtn');
+  const COOKIE_KEY = 'sirensbay_cookies_accepted';
+
+  // Проверяем, принял ли пользователь cookies ранее
+  function isAccepted(){
+    try{ return localStorage.getItem(COOKIE_KEY) === '1'; }
+    catch(e){ return false; }
+  }
+  function markAccepted(){
+    try{ localStorage.setItem(COOKIE_KEY, '1'); }
+    catch(e){}
+  }
+
+  // Показываем плашку с небольшой задержкой, если согласие не получено
+  if (!isAccepted()){
+    setTimeout(() => {
+      banner.classList.add('show');
+    }, 1200);
+  }
+
+  // Обработчик кнопки "Принять"
+  acceptBtn.addEventListener('click', () => {
+    markAccepted();
+    banner.classList.remove('show');
+  });
+})();
 
 /* =========================================================
    CANVAS-ВОЛНЫ (адаптивные)
